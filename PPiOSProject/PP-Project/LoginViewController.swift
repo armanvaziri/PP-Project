@@ -24,9 +24,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         view.set2GradientBackground(colorOne: UIColor.white.withAlphaComponent(0.6), colorTwo:
         UIColor.blue.withAlphaComponent(0.6))
-        usernameTextField.frame.size.height = 66
-        passwordTextField.frame.size.height = 66
-        loginButton.frame.size.height = 66
+        usernameTextField.frame.size.height = 55
+        passwordTextField.frame.size.height = 55
+        loginButton.frame.size.height = 55
         loginButton.layer.cornerRadius = loginButton.frame.height / 2
         usernameTextField.cornerRadius = usernameTextField.frame.height / 2
         passwordTextField.cornerRadius = passwordTextField.frame.height / 2

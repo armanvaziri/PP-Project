@@ -100,16 +100,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NaT-Dy-plu">
-                                <rect key="frame" x="0.0" y="44" width="414" height="582"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="575"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1o-br-2kB">
-                                <rect key="frame" x="0.0" y="620" width="414" height="276"/>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-zd-VdF">
+                                <rect key="frame" x="-43" y="-118" width="500" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-zd-VdF">
-                                <rect key="frame" x="0.0" y="44" width="414" height="58"/>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1o-br-2kB">
+                                <rect key="frame" x="0.0" y="620" width="414" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </button>
@@ -133,6 +133,7 @@
                         <outlet property="homeRemotePanel" destination="a1o-br-2kB" id="127-Nv-okU"/>
                         <outlet property="mapView" destination="NaT-Dy-plu" id="VOe-cm-gt3"/>
                         <outlet property="payButton" destination="a1o-br-2kB" id="3CC-k1-vwT"/>
+                        <outlet property="upperStrip" destination="Uam-zd-VdF" id="biM-a1-jei"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0p6-Jy-ADf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -185,8 +186,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="green logo" translatesAutoresizingMaskIntoConstraints="NO" id="keL-QC-wTP">
-                                <rect key="frame" x="120" y="44" width="175" height="48"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="white logo" translatesAutoresizingMaskIntoConstraints="NO" id="keL-QC-wTP">
+                                <rect key="frame" x="138" y="44" width="138" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -207,11 +208,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="green logo" width="4178" height="959"/>
         <image name="menuIcon" width="100" height="100"/>
         <image name="white logo" width="4178" height="959"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MF3-8T-7c0"/>
+        <segue reference="UO4-qh-24C"/>
     </inferredMetricsTieBreakers>
 </document>
