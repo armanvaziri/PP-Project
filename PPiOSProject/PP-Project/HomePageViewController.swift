@@ -14,6 +14,9 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var locationManage = CLLocationManager()
     
+    @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var homeRemotePanel: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,9 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
             print("Please enable location services or GPS")
         }
       
+                homeRemotePanel.layer.shadowRadius = 4.0
+        homeRemotePanel.layer.shadowOpacity = 0.5
+        homeRemotePanel.layer.shadowColor = UIColor.lightGray.cgColor
     }
     
     //MARK;- CLLocationManager Delegates
