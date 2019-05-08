@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     self.present(alertController, animated: true, completion: nil)
                 }
             }
-            
+            performSegue(withIdentifier: "signupToHome", sender: sender)
         }
     }
     

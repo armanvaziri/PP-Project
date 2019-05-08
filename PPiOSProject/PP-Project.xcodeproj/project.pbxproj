@@ -14,7 +14,6 @@
 		A2170446228103550006DBAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2170445228103550006DBAB /* Assets.xcassets */; };
 		A2170449228103550006DBAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2170447228103550006DBAB /* LaunchScreen.storyboard */; };
 		A2170457228109C80006DBAB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2170456228109C80006DBAB /* LoginViewController.swift */; };
-		A2170459228109E40006DBAB /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2170458228109E40006DBAB /* HomePageViewController.swift */; };
 		A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045A22810A6C0006DBAB /* CustomColors.swift */; };
 		A217045D22810C130006DBAB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045C22810C130006DBAB /* GradientExtension.swift */; };
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
@@ -36,7 +35,6 @@
 		A2170448228103550006DBAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A217044A228103550006DBAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2170456228109C80006DBAB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A2170458228109E40006DBAB /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		A217045A22810A6C0006DBAB /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		A217045C22810C130006DBAB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */,
 				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
 				A2170442228103540006DBAB /* Main.storyboard */,
-				A2170458228109E40006DBAB /* HomePageViewController.swift */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
 				A217044A228103550006DBAB /* Info.plist */,
@@ -272,7 +269,6 @@
 				A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */,
 				A217045D22810C130006DBAB /* GradientExtension.swift in Sources */,
 				A217043F228103540006DBAB /* AppDelegate.swift in Sources */,
-				A2170459228109E40006DBAB /* HomePageViewController.swift in Sources */,
 				A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */,
 				A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */,
 			);
