@@ -19,10 +19,9 @@
 		A217045D22810C130006DBAB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045C22810C130006DBAB /* GradientExtension.swift */; };
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
 		A2203A2F2281A9FD000E7FA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2203A2E2281A9FD000E7FA9 /* GoogleService-Info.plist */; };
-		A2252E612282494800AF9F91 /* MapWithSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E602282494800AF9F91 /* MapWithSearchViewController.swift */; };
-		A2252E652282692300AF9F91 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E642282692300AF9F91 /* SearchResultsTableViewController.swift */; };
-		A2252E672282695200AF9F91 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E662282695200AF9F91 /* SearchResultsTableViewCell.swift */; };
+		A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
+		A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C47C822282DC37007226FC /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,10 +41,9 @@
 		A217045C22810C130006DBAB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		A2203A2E2281A9FD000E7FA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		A2252E602282494800AF9F91 /* MapWithSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithSearchViewController.swift; sourceTree = "<group>"; };
-		A2252E642282692300AF9F91 /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
-		A2252E662282695200AF9F91 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
+		A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHomeViewController.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		A2C47C822282DC37007226FC /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +103,8 @@
 				A217045A22810A6C0006DBAB /* CustomColors.swift */,
 				A2170456228109C80006DBAB /* LoginViewController.swift */,
 				A2170440228103540006DBAB /* SignUpViewController.swift */,
-				A2252E602282494800AF9F91 /* MapWithSearchViewController.swift */,
-				A2252E6822826F7400AF9F91 /* SearchResults */,
+				A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */,
+				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
 				A2170442228103540006DBAB /* Main.storyboard */,
 				A2170458228109E40006DBAB /* HomePageViewController.swift */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
@@ -115,15 +113,6 @@
 				A2203A2E2281A9FD000E7FA9 /* GoogleService-Info.plist */,
 			);
 			path = "PP-Project";
-			sourceTree = "<group>";
-		};
-		A2252E6822826F7400AF9F91 /* SearchResults */ = {
-			isa = PBXGroup;
-			children = (
-				A2252E642282692300AF9F91 /* SearchResultsTableViewController.swift */,
-				A2252E662282695200AF9F91 /* SearchResultsTableViewCell.swift */,
-			);
-			path = SearchResults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,17 +265,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2252E672282695200AF9F91 /* SearchResultsTableViewCell.swift in Sources */,
 				A2170457228109C80006DBAB /* LoginViewController.swift in Sources */,
+				A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */,
 				A266869622815D350096722A /* UIButtonExtension.swift in Sources */,
-				A2252E652282692300AF9F91 /* SearchResultsTableViewController.swift in Sources */,
 				A2170441228103540006DBAB /* SignUpViewController.swift in Sources */,
 				A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */,
-				A2252E612282494800AF9F91 /* MapWithSearchViewController.swift in Sources */,
 				A217045D22810C130006DBAB /* GradientExtension.swift in Sources */,
 				A217043F228103540006DBAB /* AppDelegate.swift in Sources */,
 				A2170459228109E40006DBAB /* HomePageViewController.swift in Sources */,
 				A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */,
+				A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

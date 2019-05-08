@@ -91,10 +91,4 @@ class SearchResultsTableViewController: UITableViewController, MKLocalSearchComp
 
 }
 
-extension SearchResultsTableViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-}
-
 

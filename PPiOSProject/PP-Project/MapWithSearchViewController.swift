@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapWithSearchViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate, UISearchControllerDelegate, MKLocalSearchCompleterDelegate {
     
@@ -28,7 +29,7 @@ class MapWithSearchViewController: UIViewController, UISearchBarDelegate, CLLoca
                 
                 locationManage.requestWhenInUseAuthorization()
             }
-            locationManage.desiredAccuracy = kCLLocationAccuracyBest
+            locationManage.desiredAccuracy = 1.0
             locationManage.delegate = self
             locationManage.startUpdatingLocation()
         } else {
