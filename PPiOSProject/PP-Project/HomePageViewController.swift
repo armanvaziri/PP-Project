@@ -16,7 +16,6 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var payButton: UIButton!
     @IBOutlet weak var homeRemotePanel: UIButton!
-    @IBOutlet weak var upperStrip: UIButton!
     
     
     override func viewDidLoad() {
@@ -39,7 +38,6 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 homeRemotePanel.layer.shadowRadius = 4.0
         homeRemotePanel.layer.shadowOpacity = 0.5
         homeRemotePanel.layer.shadowColor = UIColor.lightGray.cgColor
-       
     }
     
     //MARK;- CLLocationManager Delegates
@@ -48,6 +46,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.0015, longitudeDelta: 0.0015))
         self.mapView.setRegion(region, animated: true)
     }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Unnable to access your current location")
     }
