@@ -52,6 +52,8 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
+        
+        locationSearchTable.mapView = mapView
     }
     
     //MARK:- CLLocationManager Delegates
