@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="env-Wh-vyD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SDZ-sH-Uag">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -128,6 +128,9 @@
                                 <state key="normal" title="Wallet">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="walletButtonPressed:" destination="dGe-kV-tad" eventType="touchUpInside" id="Q0R-P9-vom"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,11 +142,41 @@
                         <outlet property="mapView" destination="4Wk-5x-MxZ" id="GMc-bY-cib"/>
                         <outlet property="orangeButton" destination="1Tg-a3-wHM" id="jb4-fL-vvM"/>
                         <outlet property="purpleButton" destination="arA-5H-0ZZ" id="rIH-Sb-aEe"/>
+                        <segue destination="eYd-Sf-clF" kind="show" identifier="homeToWalletSegue" id="D9p-Jg-nWQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keq-YR-dsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-168.11594202898553" y="19.419642857142858"/>
+        </scene>
+        <!--Wallet View Controller-->
+        <scene sceneID="c0L-ZO-xGK">
+            <objects>
+                <tableViewController id="LdL-f8-0Uq" customClass="WalletViewController" customModule="PP_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zkH-bx-OMM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Jo2-7E-uGt">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jo2-7E-uGt" id="yve-G5-IRD">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LdL-f8-0Uq" id="iUC-ig-QP6"/>
+                            <outlet property="delegate" destination="LdL-f8-0Uq" id="kQT-3F-xd5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="QCW-NO-k66"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KC6-CE-1jl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2284.057971014493" y="405.80357142857139"/>
         </scene>
         <!--Location Search Table-->
         <scene sceneID="oQf-De-YPE">
@@ -187,7 +220,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hU-aU-5Dx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504" y="696"/>
+            <point key="canvasLocation" x="-168" y="680"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="q3y-DP-FfV">
@@ -273,11 +306,30 @@
             </objects>
             <point key="canvasLocation" x="-819" y="20"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oMn-CY-Kex">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eYd-Sf-clF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q1T-Xa-KA3">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LdL-f8-0Uq" kind="relationship" relationship="rootViewController" id="CTn-NC-AUs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bki-0W-oGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1373.913043478261" y="405.80357142857139"/>
+        </scene>
     </scenes>
     <resources>
         <image name="white logo" width="4178" height="959"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7zd-Jz-wQn"/>
+        <segue reference="CMk-2M-Cef"/>
+        <segue reference="dEW-rq-pAY"/>
     </inferredMetricsTieBreakers>
 </document>

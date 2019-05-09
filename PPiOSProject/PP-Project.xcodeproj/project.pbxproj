@@ -20,6 +20,8 @@
 		A2203A2F2281A9FD000E7FA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2203A2E2281A9FD000E7FA9 /* GoogleService-Info.plist */; };
 		A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
+		A2A4A9C62283ADE30017D6BF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */; };
+		A2A4A9C82283AE120017D6BF /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C72283AE120017D6BF /* WalletCell.swift */; };
 		A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C47C822282DC37007226FC /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		A2203A2E2281A9FD000E7FA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHomeViewController.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		A2A4A9C72283AE120017D6BF /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		A2C47C822282DC37007226FC /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,11 +103,13 @@
 				A266869522815D350096722A /* UIButtonExtension.swift */,
 				A217045C22810C130006DBAB /* GradientExtension.swift */,
 				A217045A22810A6C0006DBAB /* CustomColors.swift */,
+				A2170442228103540006DBAB /* Main.storyboard */,
 				A2170456228109C80006DBAB /* LoginViewController.swift */,
 				A2170440228103540006DBAB /* SignUpViewController.swift */,
 				A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */,
 				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
-				A2170442228103540006DBAB /* Main.storyboard */,
+				A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */,
+				A2A4A9C72283AE120017D6BF /* WalletCell.swift */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
 				A217044A228103550006DBAB /* Info.plist */,
@@ -266,11 +272,13 @@
 				A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */,
 				A266869622815D350096722A /* UIButtonExtension.swift in Sources */,
 				A2170441228103540006DBAB /* SignUpViewController.swift in Sources */,
+				A2A4A9C82283AE120017D6BF /* WalletCell.swift in Sources */,
 				A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */,
 				A217045D22810C130006DBAB /* GradientExtension.swift in Sources */,
 				A217043F228103540006DBAB /* AppDelegate.swift in Sources */,
 				A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */,
 				A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */,
+				A2A4A9C62283ADE30017D6BF /* WalletViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -105,8 +105,20 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
     }
+    
+    @IBAction func walletButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "homeToWalletSegue", sender: sender)
+    }
+    
+    
+    
 }
 
+//End of class
+
+
+
+// Pin placing/editing delegates
 
 extension MapHomeViewController: MKMapViewDelegate{
     
