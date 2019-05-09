@@ -24,7 +24,7 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        mapView.delegate = self as? MKMapViewDelegate
+        mapView.delegate = self as MKMapViewDelegate
         let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
         mapView.addGestureRecognizer(longTapGesture)
     
@@ -37,6 +37,8 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
         purpleButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         blueButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         
+        
+        // User location
         if CLLocationManager.locationServicesEnabled() == true {
             
             if CLLocationManager.authorizationStatus() == .restricted || CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .notDetermined {
@@ -47,23 +49,24 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = 1.0
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
+            
     
         } else {
             print("Please enable location services or GPS")
         }
         
-        //Create searchResultTable
+        // Create searchResultTable
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
         
-        //Create searchbar
+        // Create searchbar
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Select or search your location"
         navigationItem.titleView = resultSearchController?.searchBar
         
-        
+        // UI edits
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
@@ -71,22 +74,55 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
         locationSearchTable.mapView = mapView
     }
     
+    //Recognizes tap on map
     @objc func longTap(sender: UIGestureRecognizer) {
         print("long tap")
         if sender.state == .began {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            addAnnotation(location: locationOnMap)
+            
+            // Get data and create CLLocation object
+            let getLat: CLLocationDegrees = locationOnMap.latitude
+            let getLon: CLLocationDegrees = locationOnMap.longitude
+            getPlaceMarkerFromLocation(location: CLLocation(latitude: getLat, longitude: getLon))
+
+            
         }
     }
     
-    func addAnnotation(location: CLLocationCoordinate2D){
+    static var pinnedLocation: CLLocation? = nil
+    
+    func getPlaceMarkerFromLocation(location: CLLocation) {
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
+            if (error != nil) {
+                print("reverse geocode fail")
+            }
+            let pm = placemarks as! [CLPlacemark]
+            if pm.count > 0 {
+                self.addAnnotation(location: pm[0])
+            }
+        })
+    }
+
+    func addAnnotation(location: CLPlacemark) {
+
         let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        annotation.title = "Some Title"
-        annotation.subtitle = "Some Subtitle"
+        annotation.coordinate = location.location!.coordinate
+        annotation.title = location.name
+        annotation.subtitle = location.locality
         self.mapView.addAnnotation(annotation)
     }
+    
+//    //Adds annotation to pin
+//    func addAnnotation(location: CLLocationCoordinate2D) {
+//
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = location
+//
+//        annotation.title = "Unknown"
+//        annotation.subtitle = "Category: unknown"
+//        self.mapView.addAnnotation(annotation)
+//    }
     
     
     @objc func pulseButton(_ sender:UIButton) {
@@ -97,7 +133,7 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.0015, longitudeDelta: 0.0015))
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.0008, longitudeDelta: 0.0008))
         self.mapView.setRegion(region, animated: true)
         
     }
@@ -106,10 +142,7 @@ class MapHomeViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    @IBAction func walletButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "homeToWalletSegue", sender: sender)
-    }
-    
+
     
     
 }
@@ -126,6 +159,7 @@ extension MapHomeViewController: MKMapViewDelegate{
         guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
         
 
+        //Create the pin
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
@@ -145,7 +179,7 @@ extension MapHomeViewController: MKMapViewDelegate{
         print("tapped on pin ")
     }
     
-    //Handles tapping on pin pop-up window
+    //Handles tapping on pin pop-up (i) window
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             if let doSomething = view.annotation?.title! {

@@ -36,6 +36,9 @@ class LocationSearchTable: UITableViewController {
             secondSpace,
             // state
             selectedItem.administrativeArea ?? ""
+           
+            
+            
         )
         return addressLine
     }

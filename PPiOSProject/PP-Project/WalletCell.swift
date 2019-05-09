@@ -10,6 +10,9 @@ import UIKit
 
 class WalletCell: UITableViewCell {
     
+    @IBOutlet weak var cardImage: UIImageView!
+    
+    
     var mainImageView : UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,8 +24,8 @@ class WalletCell: UITableViewCell {
     
         
         self.addSubview(mainImageView)
-    
-        
+
+
         mainImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         mainImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         mainImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

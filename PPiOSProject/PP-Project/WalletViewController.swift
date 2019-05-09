@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreGraphics
 
 class WalletViewController: UITableViewController {
     
     var images = ["card1", "card2", "card3", "card4", "card5"]
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +32,17 @@ class WalletViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return images.count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15.0
-    }
- 
-
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WalletCell
         
         cell.mainImageView.image = UIImage(named: images[indexPath.row])
         
+  
+        
         cell.layer.borderWidth = 15
         cell.layer.borderColor = UIColor.white.cgColor
-        cell.layer.cornerRadius = 15
+        cell.layer.cornerRadius = 25
         cell.clipsToBounds = true
         return cell
     }
@@ -50,7 +50,9 @@ class WalletViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }
-  
+    
+    
+   
 
     /*
     // Override to support conditional editing of the table view.
