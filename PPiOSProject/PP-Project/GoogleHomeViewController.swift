@@ -24,17 +24,19 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        self.locationManager.startMonitoringSignificantLocationChanges()
         let mapView = GMSMapView()
+        mapView.settings.myLocationButton = true
         let camera = GMSCameraPosition()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
-        self.locationManager.stopUpdatingLocation()
+       
     }
     
     func showCurrentLocationOnMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), camera: camera)
         
@@ -42,9 +44,12 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
         marker.position = camera.target
         marker.snippet = "Current location"
         marker.appearAnimation = GMSMarkerAnimation.pop
+        marker.isDraggable = true
         marker.map = mapView
         self.view.addSubview(mapView)
     }
     
-
+    
+    
+    
 }
