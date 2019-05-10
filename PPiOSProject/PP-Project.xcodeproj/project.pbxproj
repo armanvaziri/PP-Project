@@ -23,6 +23,7 @@
 		A2A4A9C62283ADE30017D6BF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */; };
 		A2A4A9C82283AE120017D6BF /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C72283AE120017D6BF /* WalletCell.swift */; };
 		A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C47C822282DC37007226FC /* LocationSearchTable.swift */; };
+		A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A2A4A9C72283AE120017D6BF /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		A2C47C822282DC37007226FC /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
 				A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */,
 				A2A4A9C72283AE120017D6BF /* WalletCell.swift */,
+				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
 				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 			files = (
 				A2170457228109C80006DBAB /* LoginViewController.swift in Sources */,
 				A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */,
+				A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */,
 				A266869622815D350096722A /* UIButtonExtension.swift in Sources */,
 				A2170441228103540006DBAB /* SignUpViewController.swift in Sources */,
 				A2A4A9C82283AE120017D6BF /* WalletCell.swift in Sources */,
