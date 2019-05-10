@@ -7,24 +7,44 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
+import CoreLocation
+import GoogleUtilities
 
-class GoogleHomeViewController: UIViewController {
-
+class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
+    
+    
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        let mapView = GMSMapView()
+        let camera = GMSCameraPosition()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.showCurrentLocationOnMap()
+        self.locationManager.stopUpdatingLocation()
     }
-    */
+    
+    func showCurrentLocationOnMap() {
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 17.0)
+        
+        let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), camera: camera)
+        
+        let marker = GMSMarker()
+        marker.position = camera.target
+        marker.snippet = "Current location"
+        marker.appearAnimation = GMSMarkerAnimation.pop
+        marker.map = mapView
+        self.view.addSubview(mapView)
+    }
+    
 
 }
