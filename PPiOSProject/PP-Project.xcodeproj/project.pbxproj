@@ -19,10 +19,10 @@
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
 		A2252E6A2282D5D500AF9F91 /* MapHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
+		A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */; };
 		A2A4A9C62283ADE30017D6BF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */; };
 		A2A4A9C82283AE120017D6BF /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4A9C72283AE120017D6BF /* WalletCell.swift */; };
 		A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C47C822282DC37007226FC /* LocationSearchTable.swift */; };
-		A2D9DC57228431C1008DD96A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2D9DC56228431C1008DD96A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,10 +42,10 @@
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		A2252E692282D5D500AF9F91 /* MapHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHomeViewController.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A2A4A9C72283AE120017D6BF /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		A2C47C822282DC37007226FC /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
-		A2D9DC56228431C1008DD96A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +110,8 @@
 				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
 				A2A4A9C52283ADE30017D6BF /* WalletViewController.swift */,
 				A2A4A9C72283AE120017D6BF /* WalletCell.swift */,
-				A2D9DC56228431C1008DD96A /* GoogleService-Info.plist */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
+				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
 				A217044A228103550006DBAB /* Info.plist */,
 			);
@@ -180,7 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2170449228103550006DBAB /* LaunchScreen.storyboard in Resources */,
-				A2D9DC57228431C1008DD96A /* GoogleService-Info.plist in Resources */,
+				A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */,
 				A2170446228103550006DBAB /* Assets.xcassets in Resources */,
 				A2170444228103540006DBAB /* Main.storyboard in Resources */,
 			);
