@@ -343,6 +343,7 @@
         <image name="white logo" width="4178" height="959"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="O7H-vf-sfh"/>
         <segue reference="dEW-rq-pAY"/>
     </inferredMetricsTieBreakers>
 </document>

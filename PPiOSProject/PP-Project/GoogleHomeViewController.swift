@@ -12,7 +12,7 @@ import GooglePlaces
 import CoreLocation
 import GoogleUtilities
 
-class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
+class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     
     let locationManager = CLLocationManager()
@@ -28,18 +28,18 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
         let mapView = GMSMapView()
         mapView.settings.myLocationButton = true
         let camera = GMSCameraPosition()
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
-       
     }
     
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), camera: camera)
-        
+        mapView.delegate = self
         let marker = GMSMarker()
         marker.position = camera.target
         marker.snippet = "Current location"
@@ -49,7 +49,23 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate {
         self.view.addSubview(mapView)
     }
     
+    let infoMarker = GMSMarker()
     
+    func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
+                 name: String, location: CLLocationCoordinate2D) {
+        print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
+        infoMarker.snippet = placeID
+        infoMarker.position = location
+        infoMarker.title = name
+        infoMarker.opacity = 0;
+        infoMarker.infoWindowAnchor.y = 1
+        infoMarker.map = mapView
+        mapView.selectedMarker = infoMarker
+        
+    }
+
+    
+
     
     
 }
