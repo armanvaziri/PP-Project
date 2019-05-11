@@ -16,6 +16,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     
     let locationManager = CLLocationManager()
+    var placesClient: GMSPlacesClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.startMonitoringSignificantLocationChanges()
-        let mapView = GMSMapView()
-        mapView.settings.myLocationButton = true
+        let theMap = GMSMapView()
+        theMap.settings.myLocationButton = true
         let camera = GMSCameraPosition()
         
     }
@@ -36,7 +37,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func showCurrentLocationOnMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 20.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), camera: camera)
         mapView.delegate = self
@@ -51,21 +52,43 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     let infoMarker = GMSMarker()
     
+    //Recognizes tap on POI and creates a marker displaying information
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
         print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
+        infoMarker.title = name
         infoMarker.snippet = placeID
         infoMarker.position = location
-        infoMarker.title = name
         infoMarker.opacity = 0;
         infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
         
+        //For displaying extended place information (ex: types)
+        
+//        // Specify the place data types to return.
+//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+//            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
+//
+//        let placesClient = GMSPlacesClient.shared()
+//
+//        placesClient.fetchPlace(fromPlaceID: placeID, placeFields: fields, sessionToken: nil, callback: {(place: GMSPlace?, error: Error?) in
+//            if error != nil {
+//                print("ERROR OCCURRED: \(error?.localizedDescription)")
+//                return
+//            }
+//            if let place = place {
+//                print("UPDATING PLACE")
+//                self.infoMarker.title = place.name
+//                self.infoMarker.snippet = place.types?[0]
+//                mapView.selectedMarker = self.infoMarker
+//            }
+//        })
+        
     }
-
     
+   
 
-    
     
 }
+// End of Class
