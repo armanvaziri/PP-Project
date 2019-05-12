@@ -66,24 +66,28 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         //For displaying extended place information (ex: types)
         
-//        // Specify the place data types to return.
-//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-//            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
-//
-//        let placesClient = GMSPlacesClient.shared()
-//
-//        placesClient.fetchPlace(fromPlaceID: placeID, placeFields: fields, sessionToken: nil, callback: {(place: GMSPlace?, error: Error?) in
-//            if error != nil {
-//                print("ERROR OCCURRED: \(error?.localizedDescription)")
-//                return
-//            }
-//            if let place = place {
-//                print("UPDATING PLACE")
-//                self.infoMarker.title = place.name
-//                self.infoMarker.snippet = place.types?[0]
-//                mapView.selectedMarker = self.infoMarker
-//            }
-//        })
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
+
+        let placesClient = GMSPlacesClient.shared()
+
+        placesClient.fetchPlace(fromPlaceID: placeID, placeFields: fields, sessionToken: nil, callback: {(place: GMSPlace?, error: Error?) in
+            if error != nil {
+                print("ERROR OCCURRED: \(error?.localizedDescription)")
+                return
+            }
+            if let place = place {
+                print("UPDATING PLACE")
+                self.infoMarker.title = place.name
+                var typeString = ""
+                for type in place.types! {
+                    typeString.append(" \(type)")
+                }
+                self.infoMarker.snippet = typeString
+                mapView.selectedMarker = self.infoMarker
+            }
+        })
         
     }
     
