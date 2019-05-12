@@ -14,6 +14,11 @@ import GoogleUtilities
 
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
+    @IBOutlet weak var orangeButton: UIButton!
+    @IBOutlet weak var purpleButton: UIButton!
+    @IBOutlet weak var blueButton: UIButton!
+    @IBOutlet weak var mapScreenView: UIView!
+    
     
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
@@ -21,15 +26,25 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //Button UI settings
+        orangeButton.layer.cornerRadius = 15
+        purpleButton.layer.cornerRadius = 15
+        blueButton.layer.cornerRadius = 15
+        orangeButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        purpleButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        blueButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.startMonitoringSignificantLocationChanges()
-        let theMap = GMSMapView()
-        theMap.settings.myLocationButton = true
-        let camera = GMSCameraPosition()
         
+    }
+    
+    @objc func pulseButton(_ sender:UIButton) {
+        sender.pulse()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -39,7 +54,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 20.0)
         
-        let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), camera: camera)
+        let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         mapView.delegate = self
         let marker = GMSMarker()
         marker.position = camera.target
@@ -47,8 +62,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         marker.appearAnimation = GMSMarkerAnimation.pop
         marker.isDraggable = true
         marker.map = mapView
-        self.view.addSubview(mapView)
+        self.mapScreenView.addSubview(mapView)
+        self.mapScreenView.addSubview(orangeButton)
+        self.mapScreenView.addSubview(purpleButton)
+        self.mapScreenView.addSubview(blueButton)
     }
+    
+    
     
     let infoMarker = GMSMarker()
     
@@ -57,21 +77,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                  name: String, location: CLLocationCoordinate2D) {
         print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
         infoMarker.title = name
-        infoMarker.snippet = placeID
-        infoMarker.position = location
-        infoMarker.opacity = 0;
-        infoMarker.infoWindowAnchor.y = 1
-        infoMarker.map = mapView
-        mapView.selectedMarker = infoMarker
-        
-        //For displaying extended place information (ex: types)
         
         // Specify the place data types to return.
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
-
+        
         let placesClient = GMSPlacesClient.shared()
-
+        
         placesClient.fetchPlace(fromPlaceID: placeID, placeFields: fields, sessionToken: nil, callback: {(place: GMSPlace?, error: Error?) in
             if error != nil {
                 print("ERROR OCCURRED: \(error?.localizedDescription)")
@@ -88,6 +100,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 mapView.selectedMarker = self.infoMarker
             }
         })
+
+        infoMarker.position = location
+        infoMarker.opacity = 0;
+        infoMarker.iconView?.backgroundColor = UIColor.red
+        infoMarker.infoWindowAnchor.y = 1
+        infoMarker.map = mapView
+        mapView.selectedMarker = infoMarker
         
     }
     
