@@ -28,9 +28,24 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         // Do any additional setup after loading the view.
         
         //Button UI settings
-        orangeButton.layer.cornerRadius = 15
-        purpleButton.layer.cornerRadius = 15
-        blueButton.layer.cornerRadius = 15
+        orangeButton.layer.cornerRadius = orangeButton.frame.height / 2
+        purpleButton.layer.cornerRadius = purpleButton.frame.height / 2
+        blueButton.layer.cornerRadius = blueButton.frame.height / 2
+        orangeButton.layer.shadowColor = UIColor.lightGray.cgColor
+        orangeButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        orangeButton.layer.shadowRadius = 5
+        orangeButton.layer.shadowOpacity = 1.0
+        purpleButton.layer.shadowColor = UIColor.lightGray.cgColor
+        purpleButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        purpleButton.layer.shadowRadius = 5
+        purpleButton.layer.shadowOpacity = 1.0
+        blueButton.layer.shadowColor = UIColor.lightGray.cgColor
+        blueButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        blueButton.layer.shadowRadius = 5
+        blueButton.layer.shadowOpacity = 1.0
+        
+        
+        
         orangeButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         purpleButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         blueButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
@@ -52,7 +67,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func showCurrentLocationOnMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 20.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         mapView.delegate = self
