@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		81E59DE6D1F40C9DB0F90F07 /* Pods_PP_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E88D5FFB2CFA3020503A510 /* Pods_PP_Project.framework */; };
+		A210AE952289541700571A17 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210AE942289541700571A17 /* WalletViewController.swift */; };
+		A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210AE962289542C00571A17 /* WalletViewCell.swift */; };
 		A217043F228103540006DBAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217043E228103540006DBAB /* AppDelegate.swift */; };
 		A2170441228103540006DBAB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2170440228103540006DBAB /* SignUpViewController.swift */; };
 		A2170444228103540006DBAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2170442228103540006DBAB /* Main.storyboard */; };
@@ -19,7 +21,6 @@
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
 		A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */; };
-		A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C47C822282DC37007226FC /* LocationSearchTable.swift */; };
 		A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		22AD3AE42B96604DA7CC2DC5 /* Pods-PP-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP-Project.release.xcconfig"; path = "Target Support Files/Pods-PP-Project/Pods-PP-Project.release.xcconfig"; sourceTree = "<group>"; };
 		3E88D5FFB2CFA3020503A510 /* Pods_PP_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PP_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CDD4FE91A284C1731E90B5 /* Pods-PP-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP-Project.debug.xcconfig"; path = "Target Support Files/Pods-PP-Project/Pods-PP-Project.debug.xcconfig"; sourceTree = "<group>"; };
+		A210AE942289541700571A17 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		A210AE962289542C00571A17 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
 		A217043B228103540006DBAB /* PP-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PP-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A217043E228103540006DBAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2170440228103540006DBAB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +43,6 @@
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		A2C47C822282DC37007226FC /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A210AE9822895A9900571A17 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				A210AE942289541700571A17 /* WalletViewController.swift */,
+				A210AE962289542C00571A17 /* WalletViewCell.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		A210AE9922895AB200571A17 /* Login-Signup */ = {
+			isa = PBXGroup;
+			children = (
+				A2170456228109C80006DBAB /* LoginViewController.swift */,
+				A2170440228103540006DBAB /* SignUpViewController.swift */,
+			);
+			path = "Login-Signup";
+			sourceTree = "<group>";
+		};
 		A2170432228103540006DBAB = {
 			isa = PBXGroup;
 			children = (
@@ -100,14 +120,13 @@
 				A217045C22810C130006DBAB /* GradientExtension.swift */,
 				A217045A22810A6C0006DBAB /* CustomColors.swift */,
 				A2170442228103540006DBAB /* Main.storyboard */,
-				A2170456228109C80006DBAB /* LoginViewController.swift */,
-				A2170440228103540006DBAB /* SignUpViewController.swift */,
-				A2C47C822282DC37007226FC /* LocationSearchTable.swift */,
+				A210AE9922895AB200571A17 /* Login-Signup */,
 				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
-				A2170445228103550006DBAB /* Assets.xcassets */,
+				A210AE9822895A9900571A17 /* Wallet */,
 				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
 				A217044A228103550006DBAB /* Info.plist */,
+				A2170445228103550006DBAB /* Assets.xcassets */,
 			);
 			path = "PP-Project";
 			sourceTree = "<group>";
@@ -263,7 +282,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2170457228109C80006DBAB /* LoginViewController.swift in Sources */,
-				A2C47C832282DC37007226FC /* LocationSearchTable.swift in Sources */,
 				A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */,
 				A266869622815D350096722A /* UIButtonExtension.swift in Sources */,
 				A2170441228103540006DBAB /* SignUpViewController.swift in Sources */,
@@ -271,6 +289,8 @@
 				A217045D22810C130006DBAB /* GradientExtension.swift in Sources */,
 				A217043F228103540006DBAB /* AppDelegate.swift in Sources */,
 				A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */,
+				A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */,
+				A210AE952289541700571A17 /* WalletViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
