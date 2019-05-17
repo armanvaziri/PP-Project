@@ -156,6 +156,7 @@
                                                 </view>
                                                 <connections>
                                                     <outlet property="cellImage" destination="4kJ-Un-W2V" id="LyO-YE-toH"/>
+                                                    <outlet property="nextButton" destination="jlt-aD-lJN" id="TLJ-dx-WZH"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -164,8 +165,8 @@
                                             <outlet property="delegate" destination="vTa-Sq-fZo" id="EbS-jr-HZb"/>
                                         </connections>
                                     </collectionView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet" translatesAutoresizingMaskIntoConstraints="NO" id="nHo-dD-Ig1">
-                                        <rect key="frame" x="362" y="62" width="25" height="25"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="walletBlue" translatesAutoresizingMaskIntoConstraints="NO" id="nHo-dD-Ig1">
+                                        <rect key="frame" x="362" y="63" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -317,7 +318,7 @@
     </scenes>
     <resources>
         <image name="right-arrow" width="128" height="128"/>
-        <image name="wallet" width="128" height="128"/>
+        <image name="walletBlue" width="64" height="64"/>
         <image name="white logo" width="4178" height="959"/>
     </resources>
     <inferredMetricsTieBreakers>

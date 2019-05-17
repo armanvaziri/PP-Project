@@ -14,38 +14,33 @@ import GoogleUtilities
 
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var images = ["card1", "card2", "card3", "card4", "card5"]
-
+    // Variables
+    var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
+    let locationManager = CLLocationManager()
+    var placesClient: GMSPlacesClient!
+    let infoMarker = GMSMarker()
+    
+    // Outlets from view
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var walletImage: UIImageView!
-    
-    
-    let locationManager = CLLocationManager()
-    var placesClient: GMSPlacesClient!
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //UI settings
-        
+        // UI customizations
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
       
         walletButton.layer.shadowColor = UIColor.lightGray.cgColor
         walletButton.layer.shadowRadius = 8
         walletButton.layer.shadowOpacity = 1.0
         walletButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        walletButton.backgroundColor = UIColor.FlatColor.Blue.TurquoiseBlue
+        walletButton.backgroundColor = UIColor.white
         walletButton.layer.cornerRadius = walletButton.frame.height / 2.0
-        
         walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         walletButton.addSubview(walletImage)
-        
-        
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -55,14 +50,17 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
+    // Pulse animation
     @objc func pulseButton(_ sender:UIButton) {
         sender.pulse()
     }
     
+    // LocationManager delegates
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
     }
     
+    // Show current location on GoogleMap
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
         
@@ -78,35 +76,22 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         } catch {
             print("The style definition could not be loaded: \(error)")
         }
-        mapView.isMyLocationEnabled = true
-       
         
-//        let blueDot = UIImage(named: "bluedot")!.withRenderingMode(.alwaysTemplate)
-//        let markerView = UIImageView(image: blueDot)
-//        let marker = GMSMarker(position: camera.target)
-//        marker.icon = GMSMarker.markerImage(with: .red)
-//        marker.snippet = "Current location"
-//        let degrees = 90.0
-//        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-//        marker.rotation = degrees
-//        marker.map = mapView
-//        marker.rotation = locationManager.location?.course ?? 0
+        mapView.isMyLocationEnabled = true
+        
+        // Add all objects to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
         self.mapScreenView.addSubview(walletButton)
         self.mapScreenView.addSubview(collectionView)
         self.mapScreenView.addSubview(walletImage)
-        
-
+    
     }
     
-   
     
+    // Segueue section
     @IBAction func walletButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "homeToWallet", sender: sender)
     }
-    
-    
-    let infoMarker = GMSMarker()
     
     //Recognizes tap on POI and creates a marker displaying information
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
@@ -145,6 +130,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
+    // CollectionView delegates
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -156,7 +142,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         return cell
     }
-   
 
     
 }

@@ -11,11 +11,11 @@ import UIKit
 class POICollectionViewCell: UICollectionViewCell {
    
     @IBOutlet weak var cellImage: UIImageView!
-    
-    
+    @IBOutlet weak var nextButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // custom UI
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.backgroundColor = UIColor.white.cgColor
@@ -24,7 +24,11 @@ class POICollectionViewCell: UICollectionViewCell {
 
         self.layer.borderColor = turqoise.cgColor
         
-        
-    
+        nextButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
     }
+    
+    @objc func pulseButton(_ sender:UIButton) {
+        sender.pulse()
+    }
+    
 }

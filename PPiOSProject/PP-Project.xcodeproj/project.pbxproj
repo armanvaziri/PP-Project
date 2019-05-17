@@ -121,23 +121,39 @@
 			isa = PBXGroup;
 			children = (
 				A217043E228103540006DBAB /* AppDelegate.swift */,
+				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
+				A2170442228103540006DBAB /* Main.storyboard */,
+				A2C58F8D228E7AD80058C49F /* UIExtensions */,
+				A210AE9922895AB200571A17 /* Login-Signup */,
+				A2C58F8C228E7AB90058C49F /* Home */,
+				A210AE9822895A9900571A17 /* Wallet */,
+				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
+				A2C58F86228E517B0058C49F /* style.json */,
+				A217044A228103550006DBAB /* Info.plist */,
+				A2170445228103550006DBAB /* Assets.xcassets */,
+			);
+			path = "PP-Project";
+			sourceTree = "<group>";
+		};
+		A2C58F8C228E7AB90058C49F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
+				A2C58F88228E5A370058C49F /* POICollectionViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A2C58F8D228E7AD80058C49F /* UIExtensions */ = {
+			isa = PBXGroup;
+			children = (
 				A217045E228123370006DBAB /* UITextFieldExtension.swift */,
 				A266869522815D350096722A /* UIButtonExtension.swift */,
 				A217045C22810C130006DBAB /* GradientExtension.swift */,
 				A217045A22810A6C0006DBAB /* UIColor.swift */,
 				A2C58F8A228E6C220058C49F /* UIColor+FlatColors.swift */,
-				A2170442228103540006DBAB /* Main.storyboard */,
-				A210AE9922895AB200571A17 /* Login-Signup */,
-				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
-				A2C58F88228E5A370058C49F /* POICollectionViewCell.swift */,
-				A210AE9822895A9900571A17 /* Wallet */,
-				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
-				A2C58F86228E517B0058C49F /* style.json */,
-				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
-				A217044A228103550006DBAB /* Info.plist */,
-				A2170445228103550006DBAB /* Assets.xcassets */,
 			);
-			path = "PP-Project";
+			path = UIExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
