@@ -21,6 +21,7 @@
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
 		A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */; };
+		A2C58F87228E517B0058C49F /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = A2C58F86228E517B0058C49F /* style.json */; };
 		A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		A2C58F86228E517B0058C49F /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
 				A210AE9822895A9900571A17 /* Wallet */,
 				A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */,
+				A2C58F86228E517B0058C49F /* style.json */,
 				A2170447228103550006DBAB /* LaunchScreen.storyboard */,
 				A217044A228103550006DBAB /* Info.plist */,
 				A2170445228103550006DBAB /* Assets.xcassets */,
@@ -195,6 +198,7 @@
 				A2170449228103550006DBAB /* LaunchScreen.storyboard in Resources */,
 				A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */,
 				A2170446228103550006DBAB /* Assets.xcassets in Resources */,
+				A2C58F87228E517B0058C49F /* style.json in Resources */,
 				A2170444228103540006DBAB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

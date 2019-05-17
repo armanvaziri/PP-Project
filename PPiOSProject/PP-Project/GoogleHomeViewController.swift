@@ -37,6 +37,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         walletButton.layer.shadowOpacity = 1.0
         walletButton.layer.shadowOffset = CGSize(width: 1, height: 1)
         
+        walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
@@ -58,17 +60,29 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         mapView.delegate = self
+        do {
+            // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                print("Unable to find style.json")
+            }
+        } catch {
+            print("The style definition could not be loaded: \(error)")
+        }
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         
 //        let blueDot = UIImage(named: "bluedot")!.withRenderingMode(.alwaysTemplate)
 //        let markerView = UIImageView(image: blueDot)
-        let marker = GMSMarker(position: camera.target)
-        marker.icon = GMSMarker.markerImage(with: .red)
-        marker.snippet = "Current location"
-        let degrees = 90.0
-        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        marker.rotation = degrees
-        marker.map = mapView
-        marker.rotation = locationManager.location?.course ?? 0
+//        let marker = GMSMarker(position: camera.target)
+//        marker.icon = GMSMarker.markerImage(with: .red)
+//        marker.snippet = "Current location"
+//        let degrees = 90.0
+//        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+//        marker.rotation = degrees
+//        marker.map = mapView
+//        marker.rotation = locationManager.location?.course ?? 0
         self.mapScreenView.addSubview(mapView)
         self.mapScreenView.addSubview(walletButton)
 
