@@ -169,6 +169,13 @@
                                         <rect key="frame" x="362" y="63" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vhf-E8-wKL">
+                                        <rect key="frame" x="83" y="109" width="248" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -180,6 +187,7 @@
                     <connections>
                         <outlet property="collectionView" destination="xOa-uT-Adw" id="HNb-Cn-ums"/>
                         <outlet property="mapScreenView" destination="XOV-wk-rhQ" id="EZa-T4-rbc"/>
+                        <outlet property="searchBar" destination="vhf-E8-wKL" id="eQH-qv-EcP"/>
                         <outlet property="walletButton" destination="dd1-95-Ckt" id="v9H-th-uMw"/>
                         <outlet property="walletImage" destination="nHo-dD-Ig1" id="b1n-pL-ocO"/>
                         <segue destination="wXb-j8-dMS" kind="show" identifier="homeToWallet" id="naw-X2-KUj"/>

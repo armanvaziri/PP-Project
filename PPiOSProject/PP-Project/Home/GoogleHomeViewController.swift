@@ -12,7 +12,7 @@ import GooglePlaces
 import CoreLocation
 import GoogleUtilities
 
-class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     // Variables
     var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
@@ -25,11 +25,14 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var walletImage: UIImageView!
-
+    @IBOutlet weak var searchBar: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
+        // Miscellaneous setup
+        searchBar.delegate = self
+    
         // UI customizations
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
       
@@ -42,6 +45,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         walletButton.addSubview(walletImage)
         
+        // LocationManager set up
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
@@ -84,16 +88,16 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         self.mapScreenView.addSubview(walletButton)
         self.mapScreenView.addSubview(collectionView)
         self.mapScreenView.addSubview(walletImage)
-    
+        self.mapScreenView.addSubview(searchBar)
     }
     
     
-    // Segueue section
+    // Segueues
     @IBAction func walletButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "homeToWallet", sender: sender)
     }
     
-    //Recognizes tap on POI and creates a marker displaying information
+    //Recognizes tap on a POI and creates a marker displaying information
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
         print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
@@ -113,6 +117,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             if let place = place {
                 print("UPDATING PLACE")
                 self.infoMarker.title = place.name
+               
                 var typeString = ""
                 for type in place.types! {
                     typeString.append(" \(type)")
@@ -127,6 +132,31 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
+        
+    }
+    
+    //MARK: UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchPlaceFromGoogle(place: textField.text!)
+        return true
+    }
+    
+    func searchPlaceFromGoogle(place: String) {
+    
+        var strGoogleApi = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(place)&key=AIzaSyAQHvM_FGpNZAk-U4sdybsU2Ars6tFOux4"
+        strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
+        urlRequest.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if error == nil {
+                let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                print("json = \(jsonDict)" )
+            } else {
+                //We have an error connecting to GoogleApi
+            }
+        }
+        
+        task.resume()
         
     }
     
