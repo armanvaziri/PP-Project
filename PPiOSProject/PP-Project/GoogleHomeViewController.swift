@@ -19,6 +19,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var walletImage: UIImageView!
     
     
     let locationManager = CLLocationManager()
@@ -38,8 +39,11 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         walletButton.layer.shadowRadius = 8
         walletButton.layer.shadowOpacity = 1.0
         walletButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        walletButton.backgroundColor = UIColor.FlatColor.Blue.TurquoiseBlue
+        walletButton.layer.cornerRadius = walletButton.frame.height / 2.0
         
         walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        walletButton.addSubview(walletImage)
         
         
         
@@ -90,6 +94,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         self.mapScreenView.addSubview(mapView)
         self.mapScreenView.addSubview(walletButton)
         self.mapScreenView.addSubview(collectionView)
+        self.mapScreenView.addSubview(walletImage)
         
 
     }

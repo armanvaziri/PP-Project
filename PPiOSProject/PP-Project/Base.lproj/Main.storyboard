@@ -104,15 +104,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd1-95-Ckt">
-                                        <rect key="frame" x="357" y="52" width="33" height="39"/>
+                                        <rect key="frame" x="351" y="52" width="46" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="walletButton" image="wallet"/>
+                                        <color key="backgroundColor" red="0.33123160880000002" green="0.71775585850000001" blue="1" alpha="0.94004173800000002" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="walletButtonPressed:" destination="vTa-Sq-fZo" eventType="touchUpInside" id="7e5-It-C1X"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xOa-uT-Adw">
-                                        <rect key="frame" x="0.0" y="707" width="414" height="147"/>
+                                        <rect key="frame" x="8" y="707" width="406" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aji-fd-vXO">
@@ -164,6 +164,10 @@
                                             <outlet property="delegate" destination="vTa-Sq-fZo" id="EbS-jr-HZb"/>
                                         </connections>
                                     </collectionView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet" translatesAutoresizingMaskIntoConstraints="NO" id="nHo-dD-Ig1">
+                                        <rect key="frame" x="362" y="62" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -176,6 +180,7 @@
                         <outlet property="collectionView" destination="xOa-uT-Adw" id="HNb-Cn-ums"/>
                         <outlet property="mapScreenView" destination="XOV-wk-rhQ" id="EZa-T4-rbc"/>
                         <outlet property="walletButton" destination="dd1-95-Ckt" id="v9H-th-uMw"/>
+                        <outlet property="walletImage" destination="nHo-dD-Ig1" id="b1n-pL-ocO"/>
                         <segue destination="wXb-j8-dMS" kind="show" identifier="homeToWallet" id="naw-X2-KUj"/>
                     </connections>
                 </viewController>
