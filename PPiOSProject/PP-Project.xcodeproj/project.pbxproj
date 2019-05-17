@@ -16,13 +16,14 @@
 		A2170446228103550006DBAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2170445228103550006DBAB /* Assets.xcassets */; };
 		A2170449228103550006DBAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2170447228103550006DBAB /* LaunchScreen.storyboard */; };
 		A2170457228109C80006DBAB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2170456228109C80006DBAB /* LoginViewController.swift */; };
-		A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045A22810A6C0006DBAB /* CustomColors.swift */; };
+		A217045B22810A6C0006DBAB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045A22810A6C0006DBAB /* UIColor.swift */; };
 		A217045D22810C130006DBAB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045C22810C130006DBAB /* GradientExtension.swift */; };
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
 		A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */; };
 		A2C58F87228E517B0058C49F /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = A2C58F86228E517B0058C49F /* style.json */; };
 		A2C58F89228E5A370058C49F /* POICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C58F88228E5A370058C49F /* POICollectionViewCell.swift */; };
+		A2C58F8B228E6C220058C49F /* UIColor+FlatColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C58F8A228E6C220058C49F /* UIColor+FlatColors.swift */; };
 		A2FD9A2B22855C2D004FB35D /* GoogleHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,13 +41,14 @@
 		A2170448228103550006DBAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A217044A228103550006DBAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2170456228109C80006DBAB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A217045A22810A6C0006DBAB /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		A217045A22810A6C0006DBAB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A217045C22810C130006DBAB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A2C58F86228E517B0058C49F /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		A2C58F88228E5A370058C49F /* POICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POICollectionViewCell.swift; sourceTree = "<group>"; };
+		A2C58F8A228E6C220058C49F /* UIColor+FlatColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+FlatColors.swift"; sourceTree = "<group>"; };
 		A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +124,8 @@
 				A217045E228123370006DBAB /* UITextFieldExtension.swift */,
 				A266869522815D350096722A /* UIButtonExtension.swift */,
 				A217045C22810C130006DBAB /* GradientExtension.swift */,
-				A217045A22810A6C0006DBAB /* CustomColors.swift */,
+				A217045A22810A6C0006DBAB /* UIColor.swift */,
+				A2C58F8A228E6C220058C49F /* UIColor+FlatColors.swift */,
 				A2170442228103540006DBAB /* Main.storyboard */,
 				A210AE9922895AB200571A17 /* Login-Signup */,
 				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
@@ -295,7 +298,8 @@
 				A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */,
 				A217045D22810C130006DBAB /* GradientExtension.swift in Sources */,
 				A217043F228103540006DBAB /* AppDelegate.swift in Sources */,
-				A217045B22810A6C0006DBAB /* CustomColors.swift in Sources */,
+				A217045B22810A6C0006DBAB /* UIColor.swift in Sources */,
+				A2C58F8B228E6C220058C49F /* UIColor+FlatColors.swift in Sources */,
 				A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */,
 				A2C58F89228E5A370058C49F /* POICollectionViewCell.swift in Sources */,
 				A210AE952289541700571A17 /* WalletViewController.swift in Sources */,

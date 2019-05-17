@@ -13,14 +13,17 @@ class POICollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // custom UI
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.backgroundColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1.5
-        self.layer.borderColor = UIColor.blue.cgColor
-        // Shadow
+        self.layer.borderWidth = 2.5
+        let turqoise = UIColor.FlatColor.Blue.TurquoiseBlue
+
+        self.layer.borderColor = turqoise.cgColor
+        
         
     
     }

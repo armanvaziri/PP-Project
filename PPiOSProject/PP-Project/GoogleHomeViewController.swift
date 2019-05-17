@@ -23,6 +23,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
+
     
     
     override func viewDidLoad() {
