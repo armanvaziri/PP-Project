@@ -12,32 +12,35 @@ import GooglePlaces
 import CoreLocation
 import GoogleUtilities
 
-class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var images = ["card1", "card2", "card3", "card4", "card5"]
 
     @IBOutlet weak var mapScreenView: UIView!
-    @IBOutlet weak var menuBar: UIView!
     @IBOutlet weak var walletButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //menuBar UI settings
-        menuBar.layer.shadowColor = UIColor.lightGray.cgColor
-        menuBar.layer.shadowRadius = 8
-        menuBar.layer.shadowOpacity = 1.0
-        menuBar.layer.shadowOffset = CGSize(width: 1, height: 1)
-        menuBar.layer.backgroundColor = UIColor.white.cgColor
+        //UI settings
+        
+        collectionView.layer.backgroundColor = UIColor.clear.cgColor
+      
         walletButton.layer.shadowColor = UIColor.lightGray.cgColor
         walletButton.layer.shadowRadius = 8
         walletButton.layer.shadowOpacity = 1.0
         walletButton.layer.shadowOffset = CGSize(width: 1, height: 1)
         
         walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        
+        
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -71,7 +74,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             print("The style definition could not be loaded: \(error)")
         }
         mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+       
         
 //        let blueDot = UIImage(named: "bluedot")!.withRenderingMode(.alwaysTemplate)
 //        let markerView = UIImageView(image: blueDot)
@@ -85,6 +88,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
 //        marker.rotation = locationManager.location?.course ?? 0
         self.mapScreenView.addSubview(mapView)
         self.mapScreenView.addSubview(walletButton)
+        self.mapScreenView.addSubview(collectionView)
+        
 
     }
     
@@ -134,6 +139,17 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
+        
+        cell.cellImage.image = UIImage(named: images[indexPath.row])
+        
+        return cell
+    }
    
 
     
