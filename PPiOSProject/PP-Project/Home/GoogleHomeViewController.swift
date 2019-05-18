@@ -25,13 +25,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var walletImage: UIImageView!
-    @IBOutlet weak var searchBar: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchMagGlass: UIImageView!
+    @IBOutlet weak var searchButtonText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Miscellaneous setup
-        searchBar.delegate = self
     
         // UI customizations
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
@@ -44,6 +44,14 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         walletButton.layer.cornerRadius = walletButton.frame.height / 2.0
         walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         walletButton.addSubview(walletImage)
+        
+        searchButton.backgroundColor = UIColor.white
+        searchButton.layer.cornerRadius = 15
+        searchButton.layer.shadowColor = UIColor.lightGray.cgColor
+        searchButton.layer.shadowRadius = 4.0
+        searchButton.layer.shadowOpacity = 1.0
+        searchButton.layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
+        searchButton.layer.cornerRadius = 20.0
         
         // LocationManager set up
         self.locationManager.delegate = self
@@ -86,9 +94,12 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         // Add all objects to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
         self.mapScreenView.addSubview(walletButton)
-        self.mapScreenView.addSubview(collectionView)
         self.mapScreenView.addSubview(walletImage)
-        self.mapScreenView.addSubview(searchBar)
+//        self.mapScreenView.addSubview(collectionView)
+//        self.mapScreenView.addSubview(searchButton)
+//        self.mapScreenView.addSubview(searchMagGlass)
+//        self.mapScreenView.addSubview(searchButtonText)
+        
     }
     
     
@@ -136,29 +147,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     //MARK: UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchPlaceFromGoogle(place: textField.text!)
-        return true
-    }
     
-    func searchPlaceFromGoogle(place: String) {
-    
-        var strGoogleApi = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(place)&key=AIzaSyAQHvM_FGpNZAk-U4sdybsU2Ars6tFOux4"
-        strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
-        urlRequest.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if error == nil {
-                let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print("json = \(jsonDict)" )
-            } else {
-                //We have an error connecting to GoogleApi
-            }
-        }
-        
-        task.resume()
-        
-    }
     
     // CollectionView delegates
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
