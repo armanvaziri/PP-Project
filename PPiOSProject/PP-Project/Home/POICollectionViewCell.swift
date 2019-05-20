@@ -21,9 +21,7 @@ class POICollectionViewCell: UICollectionViewCell {
         self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.borderWidth = 2.0
         let turqoise = UIColor.FlatColor.Blue.Aqua
-
         self.layer.borderColor = turqoise.cgColor
-        
         nextButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
     }
     

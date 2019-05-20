@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8UQ-3l-Zz5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="env-Wh-vyD">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -84,6 +84,7 @@
                         <outlet property="passwordTextField" destination="Fo0-lN-zyI" id="JOg-hU-8vH"/>
                         <outlet property="signupButton" destination="e2e-Zw-yL7" id="MCU-5L-iG4"/>
                         <segue destination="env-Wh-vyD" kind="show" identifier="signupToLogin" id="O7H-vf-sfh"/>
+                        <segue destination="8UQ-3l-Zz5" kind="show" identifier="signupToHome" id="Myf-Np-4dy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BTo-cA-8eI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYj-Jx-KFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3500" y="1688"/>
+            <point key="canvasLocation" x="-3013" y="1369"/>
         </scene>
         <!--Title-->
         <scene sceneID="iqF-Sm-IXl">
@@ -384,6 +385,7 @@
                         <outlet property="passwordTextField" destination="mrY-Be-UZX" id="c7t-Vv-Ypp"/>
                         <outlet property="usernameTextField" destination="0MN-hQ-dDy" id="9HH-iQ-XlJ"/>
                         <segue destination="cvj-3V-tW1" kind="show" identifier="loginToSignup" id="CMk-2M-Cef"/>
+                        <segue destination="8UQ-3l-Zz5" kind="show" identifier="loginToHome" id="7do-E8-sJj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esB-J8-AF1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,6 +441,6 @@
         <image name="white logo" width="4178" height="959"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CMk-2M-Cef"/>
+        <segue reference="Myf-Np-4dy"/>
     </inferredMetricsTieBreakers>
 </document>

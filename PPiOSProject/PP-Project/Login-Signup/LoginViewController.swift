@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    // Outlets
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -19,44 +21,62 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        usernameTextField.delegate = self
-        passwordTextField.delegate = self
+    
+        viewload()
+        loginButtonUI()
+        usernameTextFieldUI()
+        passwordTextFieldUI()
+        
+    }
+    
+    // UI customization
+    
+    func viewload() {
         view.set2GradientBackground(colorOne: UIColor.white.withAlphaComponent(0.6), colorTwo:
-        UIColor.blue.withAlphaComponent(0.6))
-//        usernameTextField.frame.size.height = 55
-//        passwordTextField.frame.size.height = 55
+            UIColor.blue.withAlphaComponent(0.6))
+        
+    }
+    
+    func usernameTextFieldUI() {
+        usernameTextField.delegate = self
+        usernameTextField.placeholder = "EMAIL"
+        usernameTextField.borderStyle = .none
+        usernameTextField.backgroundColor = UIColor.clear
+        usernameTextField.textColor = UIColor.white
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: 35, width: usernameTextField.frame.width, height: 2.0)
+        bottomLine.backgroundColor = UIColor.white.cgColor
+        usernameTextField.borderStyle = UITextField.BorderStyle.none
+        usernameTextField.layer.addSublayer(bottomLine)
+        
+    }
+    
+    func passwordTextFieldUI() {
+        passwordTextField.delegate = self
+        passwordTextField.placeholder = "PASSWORD"
+        passwordTextField.borderStyle = .none
+        passwordTextField.backgroundColor = UIColor.clear
+        passwordTextField.textColor = UIColor.white
+        let bottomLine2 = CALayer()
+        bottomLine2.frame = CGRect(x: 0, y: 35, width: passwordTextField.frame.width, height: 2.0)
+        bottomLine2.backgroundColor = UIColor.white.cgColor
+        passwordTextField.borderStyle = UITextField.BorderStyle.none
+        passwordTextField.layer.addSublayer(bottomLine2)
+        
+        
+    }
+    
+    func loginButtonUI() {
         loginButton.frame.size.height = 55
         loginButton.layer.cornerRadius = loginButton.frame.height / 2
-//        usernameTextField.cornerRadius = usernameTextField.frame.height / 2
-//        passwordTextField.cornerRadius = passwordTextField.frame.height / 2
         loginButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
         loginButton.layer.shadowOpacity = 0.05
         loginButton.layer.shadowRadius = 0.05
         
-        usernameTextField.placeholder = "EMAIL"
-        passwordTextField.placeholder = "PASSWORD"
-        usernameTextField.borderStyle = .none
-        passwordTextField.borderStyle = .none
-        usernameTextField.backgroundColor = UIColor.clear
-        passwordTextField.backgroundColor = UIColor.clear
-        usernameTextField.textColor = UIColor.white
-        passwordTextField.textColor = UIColor.white
-        
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: 35, width: usernameTextField.frame.width, height: 2.0)
-        bottomLine.backgroundColor = UIColor.white.cgColor
-        let bottomLine2 = CALayer()
-        bottomLine2.frame = CGRect(x: 0, y: 35, width: passwordTextField.frame.width, height: 2.0)
-        bottomLine2.backgroundColor = UIColor.white.cgColor
-        
-        usernameTextField.borderStyle = UITextField.BorderStyle.none
-        usernameTextField.layer.addSublayer(bottomLine)
-//        self.view.addSubview(usernameTextField)
-        passwordTextField.borderStyle = UITextField.BorderStyle.none
-        passwordTextField.layer.addSublayer(bottomLine2)
-//        self.view.addSubview(passwordTextField)
-        
+    }
+    
+    @objc func pulseButton(_ sender:UIButton) {
+        sender.pulse()
     }
 
     
@@ -64,10 +84,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         return true
+        
     }
     
+    
+    // Signs in the user to Firebase database
+    
     @IBAction func loginAction(_ sender: Any) {
-        
         Auth.auth().signIn(withEmail: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error == nil{
                 self.performSegue(withIdentifier: "loginToHome", sender: self)
@@ -83,16 +106,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
 
     }
+
     
-    @objc func pulseButton(_ sender:UIButton) {
-        sender.pulse()
-    }
+    // Segues
     
     @IBAction func signupSegue(_ sender: UIButton) {
         performSegue(withIdentifier: "loginToSignup", sender: sender)
     }
     
-    // UITextFieldDelegate Methods
-    
-
 }

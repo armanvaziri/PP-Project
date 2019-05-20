@@ -5,7 +5,6 @@
 //  Created by Arman Vaziri on 5/10/19.
 //  Copyright © 2019 Arman Vaziri. All rights reserved.
 //
-
 import UIKit
 import GoogleMaps
 import GooglePlaces
@@ -20,7 +19,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var placesClient: GMSPlacesClient!
     let infoMarker = GMSMarker()
     
-    // Outlets from view
+    // Outlets
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -32,19 +31,23 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        // UI customizations
-        collectionView.layer.backgroundColor = UIColor.clear.cgColor
-      
-        walletButton.layer.shadowColor = UIColor.lightGray.cgColor
-        walletButton.layer.shadowRadius = 8
-        walletButton.layer.shadowOpacity = 1.0
-        walletButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        walletButton.backgroundColor = UIColor.white
-        walletButton.layer.cornerRadius = walletButton.frame.height / 2.0
-        walletButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
-        walletButton.addSubview(walletImage)
+        mainViewUI()
+        searchButtonUI()
+        locationManagerStart()
         
+    }
+    
+    // UI Customizationn
+    
+    func mainViewUI() {
+        collectionView.layer.backgroundColor = UIColor.clear.cgColor
+    }
+
+    @objc func pulseButton(_ sender:UIButton) {
+        sender.pulse()
+    }
+    
+    func searchButtonUI() {
         searchButton.backgroundColor = UIColor.white
         searchButton.layer.cornerRadius = 15
         searchButton.layer.shadowColor = UIColor.lightGray.cgColor
@@ -52,30 +55,27 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         searchButton.layer.shadowOpacity = 1.0
         searchButton.layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
         searchButton.layer.cornerRadius = 20.0
-        
-        // LocationManager set up
+    }
+    
+    // LocationManager delegates
+    
+    func locationManagerStart() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.startMonitoringSignificantLocationChanges()
-        
     }
     
-    // Pulse animation
-    @objc func pulseButton(_ sender:UIButton) {
-        sender.pulse()
-    }
-    
-    // LocationManager delegates
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
     }
     
     // Show current location on GoogleMap
+    
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
-        
+
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         mapView.delegate = self
         do {
@@ -91,10 +91,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         mapView.isMyLocationEnabled = true
         
-        // Add all objects to mapScreenView progamatically or they won't show
+        // IMPORTANT: Add all objects to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
-//        self.mapScreenView.addSubview(walletButton)
-//        self.mapScreenView.addSubview(walletImage)
         self.mapScreenView.addSubview(collectionView)
         self.mapScreenView.addSubview(searchButton)
         self.mapScreenView.addSubview(searchMagGlass)
@@ -102,19 +100,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
-    
-    // Segueues
-    @IBAction func walletButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "homeToWallet", sender: sender)
-    }
-    
-    //Recognizes tap on a POI and creates a marker displaying information
+    // Recognize tap on a POI and create a marker displaying information
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
         print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
         infoMarker.title = name
         
-        // Specify the place data types to return.
+        // Specify the place data types to return
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
             UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
         
@@ -128,7 +120,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             if let place = place {
                 print("UPDATING PLACE")
                 self.infoMarker.title = place.name
-               
+                
                 var typeString = ""
                 for type in place.types! {
                     typeString.append(" \(type)")
@@ -137,7 +129,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 mapView.selectedMarker = self.infoMarker
             }
         })
-
+        
         infoMarker.position = location
         infoMarker.opacity = 0;
         infoMarker.infoWindowAnchor.y = 1
@@ -146,10 +138,15 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
-    //MARK: UITextFieldDelegate
     
+    // Segueues
+    
+    @IBAction func walletButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "homeToWallet", sender: sender)
+    }
     
     // CollectionView delegates
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }

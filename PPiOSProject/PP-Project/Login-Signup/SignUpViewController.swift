@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
+    // Outlets
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signupButton: UIButton!
@@ -18,24 +20,45 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        passwordConfirmTextField.delegate = self
-        view.set2GradientBackground(colorOne: UIColor.purple.withAlphaComponent(0.6), colorTwo: UIColor.blue.withAlphaComponent(0.6))
-        emailTextField.frame.size.height = 66
-        passwordTextField.frame.size.height = 66
-        signupButton.frame.size.height = 66
-        signupButton.layer.cornerRadius = signupButton.frame.height / 2
-        emailTextField.cornerRadius = emailTextField.frame.height / 2
-        passwordTextField.cornerRadius = passwordTextField.frame.height / 2
-        passwordConfirmTextField.frame.size.height = 66
-        passwordConfirmTextField.cornerRadius = passwordConfirmTextField.frame.height / 2
-        signupButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+
+        emailTextFieldUI()
+        passwordTextFieldsUI()
+        signupButtonUI()
+
     }
+    
+    // UI customization
     
     @objc func pulseButton(_ sender:UIButton) {
         sender.pulse()
+    }
+    
+    func mainviewSetUp() {
+        view.set2GradientBackground(colorOne: UIColor.purple.withAlphaComponent(0.6), colorTwo: UIColor.blue.withAlphaComponent(0.6))
+    }
+    
+    func emailTextFieldUI() {
+        emailTextField.delegate = self
+        emailTextField.frame.size.height = 66
+        emailTextField.cornerRadius = emailTextField.frame.height / 2
+        
+    }
+    
+    func passwordTextFieldsUI() {
+        passwordTextField.delegate = self
+        passwordConfirmTextField.delegate = self
+        passwordTextField.frame.size.height = 66
+        passwordTextField.cornerRadius = passwordTextField.frame.height / 2
+        passwordConfirmTextField.frame.size.height = 66
+        passwordConfirmTextField.cornerRadius = passwordConfirmTextField.frame.height / 2
+        
+    }
+    
+    func signupButtonUI() {
+        signupButton.frame.size.height = 66
+        signupButton.layer.cornerRadius = signupButton.frame.height / 2
+        signupButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -45,6 +68,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // Signs up the new user to the Firebase database
     @IBAction func signUpAction(_ sender: Any) {
         if passwordTextField.text != passwordConfirmTextField.text {
             
@@ -72,10 +96,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
+    // Segues
+    
     @IBAction func loginSegue(_ sender: UIButton) {
         performSegue(withIdentifier: "signupToLogin", sender: sender)
     }
+    
     
     
     
