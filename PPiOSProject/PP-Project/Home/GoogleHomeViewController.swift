@@ -93,12 +93,12 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         // Add all objects to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
-        self.mapScreenView.addSubview(walletButton)
-        self.mapScreenView.addSubview(walletImage)
-//        self.mapScreenView.addSubview(collectionView)
-//        self.mapScreenView.addSubview(searchButton)
-//        self.mapScreenView.addSubview(searchMagGlass)
-//        self.mapScreenView.addSubview(searchButtonText)
+//        self.mapScreenView.addSubview(walletButton)
+//        self.mapScreenView.addSubview(walletImage)
+        self.mapScreenView.addSubview(collectionView)
+        self.mapScreenView.addSubview(searchButton)
+        self.mapScreenView.addSubview(searchMagGlass)
+        self.mapScreenView.addSubview(searchButtonText)
         
     }
     
