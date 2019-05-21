@@ -35,6 +35,11 @@ class CardMenuCell: UITableViewCell {
         let lbl = UILabel(frame: CGRect(x: 150, y: 65, width: self.frame.width - 80, height: 30))
         return lbl
     }()
+    
+    lazy var rewardLabel: UILabel = {
+        let lbl = UILabel(frame: CGRect(x: 20, y: 110, width: self.frame.width - 80, height: 30))
+        return lbl
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +54,7 @@ class CardMenuCell: UITableViewCell {
         backView.addSubview(nameLabel)
         backView.addSubview(name2Label)
         backView.addSubview(name3Label)
+        backView.addSubview(rewardLabel)
     }
 
 }

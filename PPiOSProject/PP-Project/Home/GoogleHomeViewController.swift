@@ -222,6 +222,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         cell.name2Label.textColor = UIColor.black
         cell.name3Label.textColor = UIColor.lightGray
         cell.cardImage.image = UIImage(named: cardImages[indexPath.row])
+        cell.rewardLabel.text = "Top reward here"
         return cell
     }
     
