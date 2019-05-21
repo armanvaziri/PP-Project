@@ -11,13 +11,16 @@ import GooglePlaces
 import CoreLocation
 import GoogleUtilities
 
-class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // Variables
     var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
+    var cardImages = ["card2", "card3", "card4", "card5", "card1"]
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
     let infoMarker = GMSMarker()
+    var cardTableView = UITableView()
+    var transparentView = UIView()
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
@@ -31,6 +34,10 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cardTableView.isScrollEnabled = true
+        cardTableView.delegate = self
+        cardTableView.dataSource = self
+        cardTableView.register(CardMenuCell.self, forCellReuseIdentifier: "Cell")
         mainViewUI()
         searchButtonUI()
         locationManagerStart()
@@ -101,7 +108,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
     }
     
-    // Recognize tap on a POI and create a marker displaying information
+    // Recognizes tap on a POI: creates a marker displaying information, reveals/returns card recommendation window
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
         
@@ -133,7 +140,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         })
         
         mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 19.0)
-        
         infoMarker.position = location
         infoMarker.opacity = 0
         infoMarker.infoWindowAnchor.y = 0.5
@@ -141,6 +147,42 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.layer.backgroundColor = UIColor.red.cgColor
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
+        
+        let window = UIApplication.shared.keyWindow
+        transparentView.backgroundColor = UIColor.clear
+        transparentView.frame = self.view.frame
+        window?.addSubview(transparentView)
+        
+        // Adds card menu to the view
+        let screenSize = UIScreen.main.bounds.size
+        cardTableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 375)
+        window?.addSubview(cardTableView)
+       
+        // Creates tap gesture for clicking on screen & returning the card menu
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickOnScreen))
+        transparentView.addGestureRecognizer(tapGesture)
+        
+        transparentView.alpha = 0
+        
+        // Card menu appearance animation
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0.5
+            self.cardTableView.frame = CGRect(x: 0, y: screenSize.height - 375, width: screenSize.width
+                , height: 375)
+        }, completion: nil)
+    }
+    
+    // Returns menu after tap on map
+    @objc func clickOnScreen() {
+        
+        let screenSize = UIScreen.main.bounds.size
+        
+        // Animates card menu return
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            // Return map here
+            self.transparentView.alpha = 0
+            self.cardTableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 375)
+        }, completion: nil)
         
     }
 
@@ -164,7 +206,28 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         return cell
     }
-
+    
+    // Card recommendation menu TableView delegates
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CardMenuCell else {fatalError("unable to deque cell")}
+        cell.nameLabel.text = "Bank name"
+        cell.name2Label.text = "Card name"
+        cell.name3Label.text = "Card provider"
+        cell.nameLabel.textColor = UIColor.lightGray
+        cell.name2Label.textColor = UIColor.black
+        cell.name3Label.textColor = UIColor.lightGray
+        cell.cardImage.image = UIImage(named: cardImages[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
     
 }
 // End of Class

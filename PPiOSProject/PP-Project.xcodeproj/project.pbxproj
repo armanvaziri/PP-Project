@@ -19,6 +19,7 @@
 		A217045B22810A6C0006DBAB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045A22810A6C0006DBAB /* UIColor.swift */; };
 		A217045D22810C130006DBAB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045C22810C130006DBAB /* GradientExtension.swift */; };
 		A217045F228123370006DBAB /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217045E228123370006DBAB /* UITextFieldExtension.swift */; };
+		A222FA782293D7D0001E2884 /* CardMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222FA772293D7D0001E2884 /* CardMenuCell.swift */; };
 		A266869622815D350096722A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266869522815D350096722A /* UIButtonExtension.swift */; };
 		A29F169E2284CEC100C0AC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */; };
 		A2C58F87228E517B0058C49F /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = A2C58F86228E517B0058C49F /* style.json */; };
@@ -44,6 +45,7 @@
 		A217045A22810A6C0006DBAB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A217045C22810C130006DBAB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		A217045E228123370006DBAB /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		A222FA772293D7D0001E2884 /* CardMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMenuCell.swift; sourceTree = "<group>"; };
 		A266869522815D350096722A /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A29F169D2284CEC100C0AC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A2C58F86228E517B0058C49F /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				A2FD9A2A22855C2D004FB35D /* GoogleHomeViewController.swift */,
 				A2C58F88228E5A370058C49F /* POICollectionViewCell.swift */,
+				A222FA772293D7D0001E2884 /* CardMenuCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				A2C58F8B228E6C220058C49F /* UIColor+FlatColors.swift in Sources */,
 				A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */,
 				A2C58F89228E5A370058C49F /* POICollectionViewCell.swift in Sources */,
+				A222FA782293D7D0001E2884 /* CardMenuCell.swift in Sources */,
 				A210AE952289541700571A17 /* WalletViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
