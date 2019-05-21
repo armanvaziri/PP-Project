@@ -72,12 +72,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     // Show current location on GoogleMap
-    
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
 
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
+        
         mapView.delegate = self
+        
         do {
             // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
             if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
@@ -93,7 +94,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         // IMPORTANT: Add all objects to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
-        self.mapScreenView.addSubview(collectionView)
+//        self.mapScreenView.addSubview(collectionView)
         self.mapScreenView.addSubview(searchButton)
         self.mapScreenView.addSubview(searchMagGlass)
         self.mapScreenView.addSubview(searchButtonText)
@@ -103,12 +104,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Recognize tap on a POI and create a marker displaying information
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
+        
         print("You tapped \(name): \(placeID), \(location.latitude)/\(location.longitude)")
         infoMarker.title = name
-        
+
         // Specify the place data types to return
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue))!
+            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.types.rawValue) | UInt(GMSPlaceField.formattedAddress.rawValue))!
         
         let placesClient = GMSPlacesClient.shared()
         
@@ -123,21 +125,25 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 
                 var typeString = ""
                 for type in place.types! {
-                    typeString.append(" \(type)")
+                    typeString.append("\(type), ")
                 }
                 self.infoMarker.snippet = typeString
                 mapView.selectedMarker = self.infoMarker
             }
         })
         
+        mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 19.0)
+        
         infoMarker.position = location
-        infoMarker.opacity = 0;
-        infoMarker.infoWindowAnchor.y = 1
+        infoMarker.opacity = 0
+        infoMarker.infoWindowAnchor.y = 0.5
+        infoMarker.appearAnimation = .pop
+        infoMarker.layer.backgroundColor = UIColor.red.cgColor
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
         
     }
-    
+
     
     // Segueues
     
