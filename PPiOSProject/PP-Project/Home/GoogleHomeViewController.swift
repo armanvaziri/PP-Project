@@ -56,7 +56,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func searchButtonUI() {
-        searchButton.layer.cornerRadius = 2
+        searchButton.layer.cornerRadius = 10
 //        searchButton.layer.shadowColor = UIColor.lightGray.cgColor
 //        searchButton.layer.shadowRadius = 4.0
 //        searchButton.layer.shadowOpacity = 1.0
@@ -64,8 +64,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
 //        searchButton.layer.cornerRadius = 20.0
         lowerView.layer.shadowColor = UIColor.lightGray.cgColor
         lowerView.layer.shadowRadius = 10.0
-        lowerView.layer.shadowOpacity = 1.0
-        lowerView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        lowerView.layer.shadowOpacity = 0.75
+        lowerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         
     }
     

@@ -17,7 +17,7 @@ class POICollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         // custom UI
-        self.layer.cornerRadius = 20.0
+        self.layer.cornerRadius = 10
         self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.borderWidth = 0.5
         let borderColor = UIColor.lightGray
