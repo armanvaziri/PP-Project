@@ -26,10 +26,10 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var walletImage: UIImageView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchMagGlass: UIImageView!
     @IBOutlet weak var searchButtonText: UILabel!
+    @IBOutlet weak var lowerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         mainViewUI()
         searchButtonUI()
         locationManagerStart()
+        lowerView.backgroundColor = UIColor.white
         
     }
     
@@ -55,13 +56,17 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func searchButtonUI() {
-        searchButton.backgroundColor = UIColor.white
-        searchButton.layer.cornerRadius = 15
-        searchButton.layer.shadowColor = UIColor.lightGray.cgColor
-        searchButton.layer.shadowRadius = 4.0
-        searchButton.layer.shadowOpacity = 1.0
-        searchButton.layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
-        searchButton.layer.cornerRadius = 20.0
+        searchButton.layer.cornerRadius = 2
+//        searchButton.layer.shadowColor = UIColor.lightGray.cgColor
+//        searchButton.layer.shadowRadius = 4.0
+//        searchButton.layer.shadowOpacity = 1.0
+//        searchButton.layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
+//        searchButton.layer.cornerRadius = 20.0
+        lowerView.layer.shadowColor = UIColor.lightGray.cgColor
+        lowerView.layer.shadowRadius = 10.0
+        lowerView.layer.shadowOpacity = 1.0
+        lowerView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        
     }
     
     // LocationManager delegates
@@ -80,7 +85,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     // Show current location on GoogleMap
     func showCurrentLocationOnMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.5)
 
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         
@@ -99,12 +104,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         mapView.isMyLocationEnabled = true
         
-        // IMPORTANT: Add all objects to mapScreenView progamatically or they won't show
+        // IMPORTANT: Add all objects (that sit on the map) to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
-//        self.mapScreenView.addSubview(collectionView)
-        self.mapScreenView.addSubview(searchButton)
-        self.mapScreenView.addSubview(searchMagGlass)
-        self.mapScreenView.addSubview(searchButtonText)
         
     }
     
@@ -139,7 +140,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             }
         })
         
-        mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 19.0)
+        // Zooms on tapped POI and places infomarker
+        mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: 19.5)
         infoMarker.position = location
         infoMarker.opacity = 0
         infoMarker.infoWindowAnchor.y = 0.5
@@ -148,19 +150,20 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
         
+        // Brings up a transparentView that recognizes taps to return the card recommendation menu
         let window = UIApplication.shared.keyWindow
         transparentView.backgroundColor = UIColor.clear
         transparentView.frame = self.view.frame
         window?.addSubview(transparentView)
         
+        // Creates tap gesture for clicking on transparentView & returning the card menu
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickOnScreen))
+        transparentView.addGestureRecognizer(tapGesture)
+        
         // Adds card menu to the view
         let screenSize = UIScreen.main.bounds.size
         cardTableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 375)
         window?.addSubview(cardTableView)
-       
-        // Creates tap gesture for clicking on screen & returning the card menu
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickOnScreen))
-        transparentView.addGestureRecognizer(tapGesture)
         
         transparentView.alpha = 0
         
@@ -177,9 +180,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         let screenSize = UIScreen.main.bounds.size
         
-        // Animates card menu return
+        // Card menu return animation
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            // Return map here
             self.transparentView.alpha = 0
             self.cardTableView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 375)
         }, completion: nil)
@@ -193,7 +195,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         performSegue(withIdentifier: "homeToWallet", sender: sender)
     }
     
-    // CollectionView delegates
+    // Nearby locations CollectionView delegates
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -215,11 +217,12 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CardMenuCell else {fatalError("unable to deque cell")}
+        // This is all hardcoded, implement credit card data here
         cell.nameLabel.text = "Bank name"
-        cell.name2Label.text = "Card name"
-        cell.name3Label.text = "Card provider"
         cell.nameLabel.textColor = UIColor.lightGray
+        cell.name2Label.text = "Card name"
         cell.name2Label.textColor = UIColor.black
+        cell.name3Label.text = "Card provider"
         cell.name3Label.textColor = UIColor.lightGray
         cell.cardImage.image = UIImage(named: cardImages[indexPath.row])
         cell.rewardLabel.text = "Top reward here"

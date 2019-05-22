@@ -19,9 +19,9 @@ class POICollectionViewCell: UICollectionViewCell {
         // custom UI
         self.layer.cornerRadius = 20.0
         self.layer.backgroundColor = UIColor.white.cgColor
-        self.layer.borderWidth = 2.0
-        let turqoise = UIColor.FlatColor.Blue.Aqua
-        self.layer.borderColor = turqoise.cgColor
+        self.layer.borderWidth = 0.5
+        let borderColor = UIColor.lightGray
+        self.layer.borderColor = borderColor.cgColor
         nextButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
     }
     
