@@ -150,6 +150,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
         
+       cardRecommendationMenu()
+
+    }
+    
+    // Brings up a tableView of cards based on user selected location
+    func cardRecommendationMenu() {
+        
         // Brings up a transparentView that recognizes taps to return the card recommendation menu
         let window = UIApplication.shared.keyWindow
         transparentView.backgroundColor = UIColor.clear
@@ -173,9 +180,10 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             self.cardTableView.frame = CGRect(x: 0, y: screenSize.height - 375, width: screenSize.width
                 , height: 375)
         }, completion: nil)
+        
     }
     
-    // Returns menu after tap on map
+    // Recognizes tap on screen, return card recommendation menu
     @objc func clickOnScreen() {
         
         let screenSize = UIScreen.main.bounds.size
