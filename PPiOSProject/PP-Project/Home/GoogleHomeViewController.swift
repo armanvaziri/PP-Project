@@ -205,17 +205,15 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Obtain nearbyLocations' name & distance
     func nearbyLocations(latitude: Double, longitude: Double) {
         
-        var jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=1000&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        var jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
         guard let url = URL(string: jsonUrlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, respone, err) in
-            //check err
-            //check response status 200 OK
-
+    
             guard let data = data else { return }
 
             let dataAsString = String(data: data, encoding: .utf8)
-            print(dataAsString)
+//            print(dataAsString)
 
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
@@ -223,10 +221,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
             } catch let jsonErr {
                 print("json error:", jsonErr)
             }
-
+            
         }.resume()
-        
-        
     }
     
     // Nearby locations CollectionView delegates
