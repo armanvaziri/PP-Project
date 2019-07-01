@@ -10,4 +10,5 @@ target 'PP-Project' do
 	pod 'Firebase/Auth'
 	pod 'GoogleMaps'
 	pod 'GooglePlaces'
+	pod 'SwiftyJSON'
 end
