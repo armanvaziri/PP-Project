@@ -23,8 +23,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var transparentView = UIView()
     
     let nearbyPlaces: [String] = []
-    var latitude: CLLocationDegrees = 0.0
-    var longitude: CLLocationDegrees = 0.0
+    var lat: CLLocationDegrees = 0.0
+    var lon: CLLocationDegrees = 0.0
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
@@ -82,16 +82,16 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
-        self.latitude = (self.locationManager.location?.coordinate.latitude)!
-        self.longitude = (self.locationManager.location?.coordinate.longitude)!
-        print("HERE IS THE COORDINATE!!!")
-        print(self.locationManager.location?.coordinate)
+        self.lat = (self.locationManager.location?.coordinate.latitude)!
+        self.lon = (self.locationManager.location?.coordinate.longitude)!
+        print("SUPPOSED TO BE:", self.locationManager.location?.coordinate)
+        print("ACTUAL: \(self.lat), \(self.lon)")
     }
     
     // Show current location on GoogleMap
     func showCurrentLocationOnMap() {
         
-        let camera = GMSCameraPosition.camera(withLatitude: self.latitude, longitude: self.longitude, zoom: 19.5)
+        let camera = GMSCameraPosition.camera(withLatitude: self.lat, longitude: self.lon, zoom: 19.5)
 
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         
@@ -214,7 +214,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Obtain nearbyLocations name & distance
     func nearbyLocations() {
         
-        var jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.latitude),\(self.longitude)&radius=1000&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        var jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7873589,-122.408227&radius=1000&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
         guard let url = URL(string: jsonUrlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, respone, err) in
