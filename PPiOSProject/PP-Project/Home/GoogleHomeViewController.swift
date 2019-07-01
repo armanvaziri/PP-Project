@@ -22,6 +22,10 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var cardTableView = UITableView()
     var transparentView = UIView()
     
+    let nearbyPlaces: [String] = []
+    var latitude: CLLocationDegrees = 0.0
+    var longitude: CLLocationDegrees = 0.0
+    
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var walletButton: UIButton!
@@ -43,6 +47,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         locationManagerStart()
         lowerView.backgroundColor = UIColor.white
         
+        nearbyLocations()
+        
     }
     
     // UI Customizationn
@@ -57,11 +63,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     func searchButtonUI() {
         searchButton.layer.cornerRadius = 10
-//        searchButton.layer.shadowColor = UIColor.lightGray.cgColor
-//        searchButton.layer.shadowRadius = 4.0
-//        searchButton.layer.shadowOpacity = 1.0
-//        searchButton.layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
-//        searchButton.layer.cornerRadius = 20.0
         lowerView.layer.shadowColor = UIColor.lightGray.cgColor
         lowerView.layer.shadowRadius = 10.0
         lowerView.layer.shadowOpacity = 0.75
@@ -81,11 +82,16 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
+        self.latitude = (self.locationManager.location?.coordinate.latitude)!
+        self.longitude = (self.locationManager.location?.coordinate.longitude)!
+        print("HERE IS THE COORDINATE!!!")
+        print(self.locationManager.location?.coordinate)
     }
     
     // Show current location on GoogleMap
     func showCurrentLocationOnMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!, zoom: 19.5)
+        
+        let camera = GMSCameraPosition.camera(withLatitude: self.latitude, longitude: self.longitude, zoom: 19.5)
 
         let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
         
@@ -106,6 +112,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         // IMPORTANT: Add all objects (that sit on the map) to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
+        
         
     }
     
@@ -150,7 +157,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
         
-       cardRecommendationMenu()
+        cardRecommendationMenu()
 
     }
     
@@ -195,12 +202,41 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         }, completion: nil)
         
     }
-
     
     // Segueues
     
     @IBAction func walletButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "homeToWallet", sender: sender)
+    }
+    
+//    private let dataProvider = GoogleDataProvider()
+    
+    // Obtain nearbyLocations name & distance
+    func nearbyLocations() {
+        
+        var jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(self.latitude),\(self.longitude)&radius=1000&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        guard let url = URL(string: jsonUrlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, respone, err) in
+            //check err
+            //check response status 200 OK
+
+            guard let data = data else { return }
+
+            let dataAsString = String(data: data, encoding: .utf8)
+            print("LOOK AT ME!!!")
+            print(dataAsString)
+
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                print(json)
+            } catch let jsonErr {
+                print("json error:", jsonErr)
+            }
+
+        }.resume()
+        
+        
     }
     
     // Nearby locations CollectionView delegates
@@ -213,6 +249,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
         
         cell.cellImage.image = UIImage(named: images[indexPath.row])
+        cell.name.text = "nearby location"
+        cell.locationDetails.text = "distance/address"
         
         return cell
     }

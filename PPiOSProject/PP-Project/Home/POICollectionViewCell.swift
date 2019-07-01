@@ -12,6 +12,8 @@ class POICollectionViewCell: UICollectionViewCell {
    
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var locationDetails: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
