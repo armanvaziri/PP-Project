@@ -14,7 +14,7 @@ import GoogleUtilities
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // Variables
-    var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
+//    var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
     var cardImages = ["card2", "card3", "card4", "card5", "card1"]
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
@@ -198,14 +198,11 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     // Segueues
     
-    @IBAction func walletButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "homeToWallet", sender: sender)
-    }
-    
+ 
     // Obtain nearbyLocations' name & distance
     func nearbyLocations(latitude: Double, longitude: Double) {
         
-        let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&keyword=store&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
         
         guard let url = URL(string: jsonUrlString) else { return }
 
@@ -217,7 +214,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
                 
                 if let results = json["results"] as! [[String: Any]]? {
-                    let resultsCount = results.count
+                    var resultsCount = results.count
                     var counter = 0
                     while counter < resultsCount {
                         let index = results[counter]
@@ -228,7 +225,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                     print("LOOK HERE !!@#$")
                     print(self.nearbyPlaces)
                 }
-                print(json)
+//                print(json)
             } catch let jsonErr {
                 print("json error:", jsonErr)
             }
@@ -239,15 +236,14 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Nearby locations CollectionView delegates
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
         
-        cell.cellImage.image = UIImage(named: images[indexPath.row])
-        cell.name.text = "nearby location"
-        cell.locationDetails.text = "distance/address"
+        cell.name.text = "location name"
+        cell.locationDetails.text = "distance"
         
         return cell
     }

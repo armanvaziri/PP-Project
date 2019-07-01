@@ -10,8 +10,6 @@ import UIKit
 
 class POICollectionViewCell: UICollectionViewCell {
    
-    @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var locationDetails: UILabel!
     
@@ -24,7 +22,6 @@ class POICollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 0.5
         let borderColor = UIColor.lightGray
         self.layer.borderColor = borderColor.cgColor
-        nextButton.addTarget(self, action: #selector(pulseButton(_:)), for: .touchDown)
     }
     
     @objc func pulseButton(_ sender:UIButton) {
