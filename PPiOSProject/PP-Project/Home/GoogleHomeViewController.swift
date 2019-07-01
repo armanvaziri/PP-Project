@@ -22,7 +22,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var cardTableView = UITableView()
     var transparentView = UIView()
     
-    let nearbyPlaces: [String] = []
+    var nearbyPlaces: [String] = []
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
@@ -206,17 +206,28 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     func nearbyLocations(latitude: Double, longitude: Double) {
         
         let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        
         guard let url = URL(string: jsonUrlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, respone, err) in
     
             guard let data = data else { return }
 
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print(dataAsString)
-
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                
+                if let results = json["results"] as! [[String: Any]]? {
+                    let resultsCount = results.count
+                    var counter = 0
+                    while counter < resultsCount {
+                        let index = results[counter]
+                        let name = index["name"] as! String
+                        self.nearbyPlaces.append(name)
+                        counter += 1
+                    }
+                    print("LOOK HERE !!@#$")
+                    print(self.nearbyPlaces)
+                }
                 print(json)
             } catch let jsonErr {
                 print("json error:", jsonErr)
