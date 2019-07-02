@@ -25,9 +25,9 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
-    @IBOutlet weak var walletButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchButtonUnder: UIButton!
+    @IBOutlet weak var searchButtonOver: UIButton!
     @IBOutlet weak var searchMagGlass: UIImageView!
     @IBOutlet weak var searchButtonText: UILabel!
     @IBOutlet weak var lowerView: UIView!
@@ -56,7 +56,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func searchButtonUI() {
-        searchButton.layer.cornerRadius = 10
+        searchButtonUnder.layer.cornerRadius = 10
         lowerView.layer.shadowColor = UIColor.lightGray.cgColor
         lowerView.layer.shadowRadius = 10.0
         lowerView.layer.shadowOpacity = 0.75

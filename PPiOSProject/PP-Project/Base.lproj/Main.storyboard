@@ -166,7 +166,7 @@
                                             <outlet property="delegate" destination="vTa-Sq-fZo" id="EbS-jr-HZb"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHp-EL-FHp">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHp-EL-FHp" userLabel="Search Button Underlay">
                                         <rect key="frame" x="13" y="16" width="388" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.94248648427260817" green="0.94248648427260817" blue="0.94248648427260817" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -183,6 +183,12 @@
                                         <rect key="frame" x="360" y="35" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GX3-cq-n1q" userLabel="Search Button OVERlay">
+                                        <rect key="frame" x="13" y="16" width="388" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -199,6 +205,7 @@
                         <outlet property="lowerView" destination="7li-fj-xdJ" id="Ppy-Pj-Vpu"/>
                         <outlet property="mapScreenView" destination="XOV-wk-rhQ" id="EZa-T4-rbc"/>
                         <outlet property="searchButton" destination="rHp-EL-FHp" id="0wt-Tb-L3y"/>
+                        <outlet property="searchButtonOver" destination="GX3-cq-n1q" id="LNe-cq-8Ll"/>
                         <outlet property="searchButtonText" destination="ddi-0L-2Lu" id="wkP-RZ-7Yz"/>
                         <outlet property="searchMagGlass" destination="BTw-CW-NXX" id="tnK-oG-6co"/>
                         <outlet property="walletButton" destination="dd1-95-Ckt" id="v9H-th-uMw"/>
