@@ -10,6 +10,8 @@ import UIKit
 
 class CardMenuCell: UITableViewCell {
     
+    // Progammatic UI 
+    
     lazy var backView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 100))
         return view

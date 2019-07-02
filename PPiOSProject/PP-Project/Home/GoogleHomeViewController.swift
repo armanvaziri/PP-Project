@@ -14,14 +14,12 @@ import GoogleUtilities
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // Variables
-//    var images = ["store1", "store2", "store3", "store4", "store5", "store6"]
     var cardImages = ["card2", "card3", "card4", "card5", "card1"]
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
     let infoMarker = GMSMarker()
     var cardTableView = UITableView()
     var transparentView = UIView()
-    
     var nearbyPlaces: [String] = []
     
     // Outlets
@@ -35,7 +33,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         cardTableView.isScrollEnabled = true
         cardTableView.delegate = self
         cardTableView.dataSource = self
@@ -44,7 +41,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         searchButtonUI()
         locationManagerStart()
         lowerView.backgroundColor = UIColor.white
-        
     }
     
     // UI Customizationn
@@ -63,7 +59,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         lowerView.layer.shadowRadius = 10.0
         lowerView.layer.shadowOpacity = 0.75
         lowerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        
     }
     
     // LocationManager delegates
@@ -78,7 +73,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.showCurrentLocationOnMap()
-        nearbyLocations(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+        nearbyPlaces(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
     }
     
     // Show current location on GoogleMap
@@ -105,11 +100,9 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         // IMPORTANT: Add all objects (that sit on the map) to mapScreenView progamatically or they won't show
         self.mapScreenView.addSubview(mapView)
-        
-        
     }
     
-    // Recognizes tap on a POI: creates a marker displaying information, reveals/returns card recommendation window
+    // Recognizes tap on a POI, creates a marker displaying information, reveals/returns card recommendation window
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String,
                  name: String, location: CLLocationCoordinate2D) {
         
@@ -154,7 +147,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
 
     }
     
-    // Brings up a tableView of cards based on user selected location
+    // Brings up a tableView of cards based on user-selected location
     func cardRecommendationMenu() {
         
         // Brings up a transparentView that recognizes taps to return the card recommendation menu
@@ -195,41 +188,39 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         }, completion: nil)
         
     }
-    
-    // Segueues
-    
  
-    // Obtain nearbyLocations' name & distance
-    func nearbyLocations(latitude: Double, longitude: Double) {
+    // Obtain the names and details of nearby locations from Google Places API
+    func nearbyPlaces(latitude: Double, longitude: Double) {
         
+        //add paramaters here to change nearby location results
         let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&keyword=store&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
         
         guard let url = URL(string: jsonUrlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, respone, err) in
-    
-            guard let data = data else { return }
-
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
-                
-                if let results = json["results"] as! [[String: Any]]? {
-                    var resultsCount = results.count
-                    var counter = 0
-                    while counter < resultsCount {
-                        let index = results[counter]
-                        let name = index["name"] as! String
-                        self.nearbyPlaces.append(name)
-                        counter += 1
-                    }
-                    print("LOOK HERE !!@#$")
-                    print(self.nearbyPlaces)
-                }
-//                print(json)
-            } catch let jsonErr {
-                print("json error:", jsonErr)
-            }
             
+            guard let data = data else { return }
+            
+            if self.nearbyPlaces.count == 0 {
+
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                    if let results = json["results"] as! [[String: Any]]? {
+                        let resultsCount = results.count
+                        var counter = 0
+                        while counter < resultsCount {
+                            let index = results[counter]
+                            let name = index["name"] as! String
+                            self.nearbyPlaces.append(name)
+                            counter += 1
+                        }
+                    }
+                    print("!!! LOOK HERE FOR NEARBY PLACES!!!")
+                    print(self.nearbyPlaces)
+                } catch let jsonErr {
+                    print("json error:", jsonErr)
+                }
+            }
         }.resume()
     }
     
