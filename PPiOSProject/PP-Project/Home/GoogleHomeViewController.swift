@@ -41,6 +41,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         searchButtonUI()
         locationManagerStart()
         lowerView.backgroundColor = UIColor.white
+ 
     }
     
     // UI Customizationn
@@ -222,6 +223,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 }
             }
         }.resume()
+        collectionView.reloadData()
     }
     
     // Nearby locations CollectionView delegates
@@ -233,8 +235,12 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
         
-        cell.name.text = "location name"
-        cell.locationDetails.text = "distance"
+        if nearbyPlaces.count > 0 {
+            cell.name.text = nearbyPlaces[indexPath.row]
+        } else {
+            cell.name.text = "location name"
+        }
+        cell.locationDetails.text = "details"
         
         return cell
     }
