@@ -21,6 +21,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var cardTableView = UITableView()
     var transparentView = UIView()
     var nearbyPlaces: [String] = []
+    var nearbyPlacesTypes: [[String]] = []
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
@@ -212,12 +213,17 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                         while counter < resultsCount {
                             let index = results[counter]
                             let name = index["name"] as! String
+                            let types = index["types"] as! [String]
                             self.nearbyPlaces.append(name)
+                            self.nearbyPlacesTypes.append(types)
+                            
                             counter += 1
                         }
+                        
                     }
                     print("!!! LOOK HERE FOR NEARBY PLACES!!!")
                     print(self.nearbyPlaces)
+                    print(self.nearbyPlacesTypes)
                 } catch let jsonErr {
                     print("json error:", jsonErr)
                 }
@@ -229,7 +235,10 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Nearby locations CollectionView delegates
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        if nearbyPlaces.count < 10 {
+            return nearbyPlaces.count
+        }
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -237,11 +246,11 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         
         if nearbyPlaces.count > 0 {
             cell.name.text = nearbyPlaces[indexPath.row]
+            cell.locationDetails.text = nearbyPlacesTypes[indexPath.row][0]
         } else {
-            cell.name.text = "location name"
+            cell.name.text = "unable to load"
+            cell.name.text = "unable to load"
         }
-        cell.locationDetails.text = "details"
-        
         return cell
     }
     
