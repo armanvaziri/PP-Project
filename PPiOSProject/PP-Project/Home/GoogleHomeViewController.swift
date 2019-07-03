@@ -22,16 +22,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var transparentView = UIView()
     var nearbyPlaces: [String] = []
     var nearbyPlacesTypes: [[String]] = []
+    var selectedPlaceTypes: [String] = []
     
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-
-    @IBOutlet weak var searchButtonUnder: UIButton!
-    @IBOutlet weak var searchButtonOver: UIButton!
-    @IBOutlet weak var searchMagGlass: UIImageView!
-    @IBOutlet weak var searchButtonText: UILabel!
     @IBOutlet weak var lowerView: UIView!
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +54,19 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func searchButtonUI() {
-        searchButtonUnder.layer.cornerRadius = 10
         lowerView.layer.shadowColor = UIColor.lightGray.cgColor
         lowerView.layer.shadowRadius = 10.0
         lowerView.layer.shadowOpacity = 0.75
         lowerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    }
+    
+    // Present the Autocomplete view controller when the textField is tapped.
+    
+    @IBAction func textFieldTapped(_ sender: Any) {
+        textField.resignFirstResponder()
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+        present(acController, animated: true, completion: nil)
     }
     
     // LocationManager delegates
@@ -281,3 +286,29 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
 }
 // End of Class
+
+extension GoogleHomeViewController: GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        // Get the place name from 'GMSAutocompleteViewController'
+        // Then display the name in textField
+        
+        textField.text = place.name
+        self.selectedPlaceTypes = place.types!
+        
+        // Dismiss the GMSAutocompleteViewController when something is selected
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        
+        // Handle the error
+        print("Error: ", error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        
+        // Dismiss when the user canceled the action
+        dismiss(animated: true, completion: nil)
+    }
+}

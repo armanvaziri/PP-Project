@@ -20,12 +20,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
+        
         FirebaseApp.configure()
         GMSServices.provideAPIKey("AIzaSyC8MZpXJgYuO0OEj_TzsgQkQ2rfVdRH6t4")
         GMSPlacesClient.provideAPIKey("AIzaSyC8MZpXJgYuO0OEj_TzsgQkQ2rfVdRH6t4")
+        
+        // Set some colors (colorLiteral is convenient)
+        
+        let barColor: UIColor = UIColor.FlatColor.Blue.Mariner
+        let backgroundColor: UIColor =  _ColorLiteralType(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        let textColor: UIColor =  UIColor.white
+        
+        // Navigation bar background.
+        
+        UINavigationBar.appearance().barTintColor = barColor
+        UINavigationBar.appearance().tintColor = UIColor.white
+
+        // Color and font of typed text in the search bar.
+        
+        let searchBarTextAttributes = [NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 16)]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = searchBarTextAttributes as [NSAttributedString.Key : Any]
+
+        // Color of the placeholder text in the search bar prior to text entry
+        
+        let placeholderAttributes = [NSAttributedString.Key.foregroundColor: backgroundColor, NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 15)]
+        
+        // Color of the default search text.
+        
+        let attributedPlaceholder = NSAttributedString(string: "Search", attributes: placeholderAttributes as [NSAttributedString.Key : Any])
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = attributedPlaceholder
+
        
         return true
+        
     }  
 
     func applicationWillResignActive(_ application: UIApplication) {
