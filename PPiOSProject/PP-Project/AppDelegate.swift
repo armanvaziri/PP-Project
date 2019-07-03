@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Color of the default search text.
         
-        let attributedPlaceholder = NSAttributedString(string: "Search", attributes: placeholderAttributes as [NSAttributedString.Key : Any])
+        let attributedPlaceholder = NSAttributedString(string: "Search location", attributes: placeholderAttributes as [NSAttributedString.Key : Any])
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = attributedPlaceholder
 
        

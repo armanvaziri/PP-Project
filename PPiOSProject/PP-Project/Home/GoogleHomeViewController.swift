@@ -14,6 +14,7 @@ import GoogleUtilities
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // Variables
+    
     var cardImages = ["card2", "card3", "card4", "card5", "card1"]
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
@@ -25,6 +26,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     var selectedPlaceTypes: [String] = []
     
     // Outlets
+    
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lowerView: UIView!
@@ -36,31 +38,27 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         cardTableView.delegate = self
         cardTableView.dataSource = self
         cardTableView.register(CardMenuCell.self, forCellReuseIdentifier: "Cell")
-        mainViewUI()
-        searchButtonUI()
+        mainUI()
         locationManagerStart()
-        lowerView.backgroundColor = UIColor.white
- 
     }
     
     // UI Customizationn
     
-    func mainViewUI() {
+    func mainUI() {
         collectionView.layer.backgroundColor = UIColor.clear.cgColor
+        lowerView.layer.shadowColor = UIColor.lightGray.cgColor
+        lowerView.layer.shadowRadius = 10.0
+        lowerView.layer.shadowOpacity = 0.75
+        lowerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        lowerView.backgroundColor = UIColor.white
+        
     }
 
     @objc func pulseButton(_ sender:UIButton) {
         sender.pulse()
     }
     
-    func searchButtonUI() {
-        lowerView.layer.shadowColor = UIColor.lightGray.cgColor
-        lowerView.layer.shadowRadius = 10.0
-        lowerView.layer.shadowOpacity = 0.75
-        lowerView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-    }
-    
-    // Present the Autocomplete view controller when the textField is tapped.
+    // Present the Autocomplete View Controller when the textField is tapped.
     
     @IBAction func textFieldTapped(_ sender: Any) {
         textField.resignFirstResponder()
@@ -155,6 +153,113 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         mapView.selectedMarker = infoMarker
         cardRecommendationMenu()
     }
+ 
+    // Obtain the names and details of nearby locations
+    // Used for collection view
+    func nearbyPlaces(latitude: Double, longitude: Double) {
+        
+        //add paramaters here to change nearby location results
+        let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&keyword=store&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
+        
+        guard let url = URL(string: jsonUrlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, respone, err) in
+            
+            guard let data = data else { return }
+            
+            if self.nearbyPlaces.count == 0 {
+
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                    if let results = json["results"] as! [[String: Any]]? {
+                        let resultsCount = results.count
+                        var counter = 0
+                        while counter < resultsCount {
+                            let index = results[counter]
+                            let name = index["name"] as! String
+                            let types = index["types"] as! [String]
+                            self.nearbyPlaces.append(name)
+                            self.nearbyPlacesTypes.append(types)
+                            
+                            counter += 1
+                        }
+                        
+                    }
+                    print("!!! LOOK HERE FOR NEARBY PLACES!!!")
+                    print(self.nearbyPlaces)
+                    print(self.nearbyPlacesTypes)
+                } catch let jsonErr {
+                    print("json error:", jsonErr)
+                }
+            }
+        }.resume()
+        collectionView.reloadData()
+    }
+    
+    // Loads the map based on selected PLACE from SEARCH
+    func loadMapView(place: GMSPlace) {
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 19.5)
+        let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
+        
+        mapView.delegate = self
+        
+        // Google Maps styling wizard
+        do {
+            // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                print("Unable to find style.json")
+            }
+        } catch {
+            print("The style definition could not be loaded: \(error)")
+        }
+        createInfoMarker(mapView: mapView, place: place)
+    }
+    
+    // Creates and places an info marker for the given place onto the map
+    func createInfoMarker(mapView: GMSMapView, place: GMSPlace) {
+        
+        mapView.isMyLocationEnabled = true
+        let location = place.coordinate
+        let marker = GMSMarker()
+        marker.title = place.name
+        marker.snippet = self.selectedPlaceTypes[0]
+        marker.position = location
+        marker.opacity = 0
+        marker.infoWindowAnchor.y = 0.5
+        marker.appearAnimation = .pop
+        marker.layer.backgroundColor = UIColor.red.cgColor
+        marker.map = mapView
+        mapView.selectedMarker = marker
+        self.mapScreenView.addSubview(mapView)
+        cardRecommendationMenu()
+        
+    }
+    
+    // Nearby locations CollectionView delegates
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if nearbyPlaces.count < 10 {
+            return nearbyPlaces.count
+        }
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
+        
+        if nearbyPlaces.count > 0 {
+            cell.name.text = nearbyPlaces[indexPath.row]
+            cell.locationDetails.text = nearbyPlacesTypes[indexPath.row][0]
+        } else {
+            cell.name.text = "unable to load"
+            cell.name.text = "unable to load"
+        }
+        return cell
+    }
     
     // Brings up a tableView of cards based on user-selected location
     func cardRecommendationMenu() {
@@ -197,70 +302,6 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         }, completion: nil)
         
     }
- 
-    // Obtain the names and details of nearby locations from Google Places API
-    func nearbyPlaces(latitude: Double, longitude: Double) {
-        
-        //add paramaters here to change nearby location results
-        let jsonUrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=25&keyword=store&key=AIzaSyAZJF1h5cRNnJiW2IkfabKchWpbWkn40HA"
-        
-        guard let url = URL(string: jsonUrlString) else { return }
-
-        URLSession.shared.dataTask(with: url) { (data, respone, err) in
-            
-            guard let data = data else { return }
-            
-            if self.nearbyPlaces.count == 0 {
-
-                do {
-                    guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
-                    if let results = json["results"] as! [[String: Any]]? {
-                        let resultsCount = results.count
-                        var counter = 0
-                        while counter < resultsCount {
-                            let index = results[counter]
-                            let name = index["name"] as! String
-                            let types = index["types"] as! [String]
-                            self.nearbyPlaces.append(name)
-                            self.nearbyPlacesTypes.append(types)
-                            
-                            counter += 1
-                        }
-                        
-                    }
-                    print("!!! LOOK HERE FOR NEARBY PLACES!!!")
-                    print(self.nearbyPlaces)
-                    print(self.nearbyPlacesTypes)
-                } catch let jsonErr {
-                    print("json error:", jsonErr)
-                }
-            }
-        }.resume()
-        collectionView.reloadData()
-    }
-    
-    // Nearby locations CollectionView delegates
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if nearbyPlaces.count < 10 {
-            return nearbyPlaces.count
-        }
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
-        
-        if nearbyPlaces.count > 0 {
-            cell.name.text = nearbyPlaces[indexPath.row]
-            cell.locationDetails.text = nearbyPlacesTypes[indexPath.row][0]
-        } else {
-            cell.name.text = "unable to load"
-            cell.name.text = "unable to load"
-        }
-        return cell
-    }
     
     // Card recommendation menu TableView delegates
     
@@ -285,64 +326,16 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
-    
-    // Loads the map based on selected PLACE
-    func loadMapView(place: GMSPlace) {
-        
-        var camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 19.5)
-        
-        var mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
-        
-        mapView.delegate = self
-        
-        // Google Maps styling wizard
-        do {
-            // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
-            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
-                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-            } else {
-                print("Unable to find style.json")
-            }
-        } catch {
-            print("The style definition could not be loaded: \(error)")
-        }
 
-        createInfoMarker(mapView: mapView, place: place)
-    }
-    
-    func createInfoMarker(mapView: GMSMapView, place: GMSPlace) {
-        
-        mapView.isMyLocationEnabled = true
-        let location = place.coordinate
-        let marker = GMSMarker()
-        marker.title = place.name
-        marker.snippet = self.selectedPlaceTypes[0]
-        marker.position = location
-        marker.opacity = 0
-        marker.infoWindowAnchor.y = 0.5
-        marker.appearAnimation = .pop
-        marker.layer.backgroundColor = UIColor.red.cgColor
-        marker.map = mapView
-        mapView.selectedMarker = marker
-        self.mapScreenView.addSubview(mapView)
-        cardRecommendationMenu()
-
-    }
-
-    
 }
 // End of Class
 
 extension GoogleHomeViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
-        // Get the place name from 'GMSAutocompleteViewController'
-        // Then display the name in textField
-        
         textField.text = place.name
         self.selectedPlaceTypes.removeAll()
         self.selectedPlaceTypes = place.types!
-        let location = place.coordinate
         loadMapView(place: place)
         
         // Dismiss the GMSAutocompleteViewController when a place is selected
@@ -351,13 +344,11 @@ extension GoogleHomeViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        
         // Handle the error
         print("Error: ", error.localizedDescription)
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        
         // Dismiss when the user canceled the action
         dismiss(animated: true, completion: nil)
     }
