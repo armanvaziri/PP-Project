@@ -200,36 +200,6 @@
             </objects>
             <point key="canvasLocation" x="-1162.3188405797102" y="440.625"/>
         </scene>
-        <!--Search View Controller-->
-        <scene sceneID="XfF-mF-bPA">
-            <objects>
-                <viewController id="tRn-Ze-2d4" customClass="SearchViewController" customModule="PP_Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OeP-xc-ASf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MXI-2L-VHT">
-                                <rect key="frame" x="159" y="433" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="textFieldTapped:" destination="tRn-Ze-2d4" eventType="editingDidBegin" id="tIh-5N-pLG"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="eyE-QG-hBm"/>
-                    </view>
-                    <connections>
-                        <outlet property="textField" destination="MXI-2L-VHT" id="KFC-jq-M7Z"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="za0-Jv-Dep" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1141" y="1238"/>
-        </scene>
         <!--Title-->
         <scene sceneID="iqF-Sm-IXl">
             <objects>

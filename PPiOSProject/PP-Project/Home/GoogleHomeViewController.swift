@@ -133,10 +133,13 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                 self.infoMarker.title = place.name
                 
                 var typeString = ""
+                self.selectedPlaceTypes.removeAll()
+                
                 for type in place.types! {
                     typeString.append("\(type), ")
+                    self.selectedPlaceTypes.append(type)
                 }
-                self.infoMarker.snippet = typeString
+                self.infoMarker.snippet = self.selectedPlaceTypes[0]
                 mapView.selectedMarker = self.infoMarker
             }
         })
@@ -150,9 +153,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         infoMarker.layer.backgroundColor = UIColor.red.cgColor
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
-        
         cardRecommendationMenu()
-
     }
     
     // Brings up a tableView of cards based on user-selected location
@@ -248,6 +249,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
         
         if nearbyPlaces.count > 0 {
@@ -284,6 +286,50 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         return 150
     }
     
+    // Loads the map based on selected PLACE
+    func loadMapView(place: GMSPlace) {
+        
+        var camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 19.5)
+        
+        var mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
+        
+        mapView.delegate = self
+        
+        // Google Maps styling wizard
+        do {
+            // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                print("Unable to find style.json")
+            }
+        } catch {
+            print("The style definition could not be loaded: \(error)")
+        }
+
+        createInfoMarker(mapView: mapView, place: place)
+    }
+    
+    func createInfoMarker(mapView: GMSMapView, place: GMSPlace) {
+        
+        mapView.isMyLocationEnabled = true
+        let location = place.coordinate
+        let marker = GMSMarker()
+        marker.title = place.name
+        marker.snippet = self.selectedPlaceTypes[0]
+        marker.position = location
+        marker.opacity = 0
+        marker.infoWindowAnchor.y = 0.5
+        marker.appearAnimation = .pop
+        marker.layer.backgroundColor = UIColor.red.cgColor
+        marker.map = mapView
+        mapView.selectedMarker = marker
+        self.mapScreenView.addSubview(mapView)
+        cardRecommendationMenu()
+
+    }
+
+    
 }
 // End of Class
 
@@ -294,10 +340,14 @@ extension GoogleHomeViewController: GMSAutocompleteViewControllerDelegate {
         // Then display the name in textField
         
         textField.text = place.name
+        self.selectedPlaceTypes.removeAll()
         self.selectedPlaceTypes = place.types!
+        let location = place.coordinate
+        loadMapView(place: place)
         
-        // Dismiss the GMSAutocompleteViewController when something is selected
+        // Dismiss the GMSAutocompleteViewController when a place is selected
         dismiss(animated: true, completion: nil)
+       
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
