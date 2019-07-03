@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8UQ-3l-Zz5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tRn-Ze-2d4">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -110,9 +110,6 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="walletButtonPressed:" destination="vTa-Sq-fZo" eventType="touchUpInside" id="7e5-It-C1X"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -204,45 +201,45 @@
                         <outlet property="collectionView" destination="xOa-uT-Adw" id="HNb-Cn-ums"/>
                         <outlet property="lowerView" destination="7li-fj-xdJ" id="Ppy-Pj-Vpu"/>
                         <outlet property="mapScreenView" destination="XOV-wk-rhQ" id="EZa-T4-rbc"/>
-                        <outlet property="searchButton" destination="rHp-EL-FHp" id="0wt-Tb-L3y"/>
                         <outlet property="searchButtonOver" destination="GX3-cq-n1q" id="LNe-cq-8Ll"/>
                         <outlet property="searchButtonText" destination="ddi-0L-2Lu" id="wkP-RZ-7Yz"/>
+                        <outlet property="searchButtonUnder" destination="rHp-EL-FHp" id="o3J-OI-hV1"/>
                         <outlet property="searchMagGlass" destination="BTw-CW-NXX" id="tnK-oG-6co"/>
-                        <outlet property="walletButton" destination="dd1-95-Ckt" id="v9H-th-uMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8r-U5-xbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1162.3188405797102" y="440.625"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="YE3-09-sia">
+        <!--Search View Controller-->
+        <scene sceneID="XfF-mF-bPA">
             <objects>
-                <viewController id="GsE-ec-oSb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TGE-K2-AWN">
+                <viewController id="tRn-Ze-2d4" customClass="SearchViewController" customModule="PP_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OeP-xc-ASf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-m9-dBC">
-                                <rect key="frame" x="62" y="72" width="289" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MXI-2L-VHT">
+                                <rect key="frame" x="159" y="433" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldTapped:" destination="tRn-Ze-2d4" eventType="editingDidBegin" id="tIh-5N-pLG"/>
+                                </connections>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-bV-Zjj">
-                                <rect key="frame" x="0.0" y="128" width="414" height="344"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="ZtQ-dS-5Kv"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="eyE-QG-hBm"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="MXI-2L-VHT" id="KFC-jq-M7Z"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jy7-bD-UlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="za0-Jv-Dep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1162.3188405797102" y="1192.6339285714284"/>
+            <point key="canvasLocation" x="-1141" y="1238"/>
         </scene>
         <!--Title-->
         <scene sceneID="iqF-Sm-IXl">
@@ -299,7 +296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m8b-yY-vTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093" y="441"/>
+            <point key="canvasLocation" x="1097" y="441"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="q3y-DP-FfV">

@@ -26,6 +26,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Outlets
     @IBOutlet weak var mapScreenView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+
     @IBOutlet weak var searchButtonUnder: UIButton!
     @IBOutlet weak var searchButtonOver: UIButton!
     @IBOutlet weak var searchMagGlass: UIImageView!
