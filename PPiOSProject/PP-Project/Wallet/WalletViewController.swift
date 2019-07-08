@@ -9,13 +9,16 @@
 import UIKit
 
 class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     @IBOutlet weak var walletView: UITableView!
+    @IBOutlet weak var AddCardButton: UIButton!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return images.count
     }
     
+    @IBAction func AddCardPressed(_ sender: Any) {
+        performSegue(withIdentifier: "addCardSegue", sender: self)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WalletViewCell {
@@ -37,19 +40,5 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         walletView.dataSource = self
         walletView.rowHeight = 225.0
         walletView.separatorColor = UIColor.clear
-        
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

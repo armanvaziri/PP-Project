@@ -248,14 +248,43 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="02T-eW-7ps"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="b3p-qH-Qe3"/>
+                    <navigationItem key="navigationItem" title="Title" id="b3p-qH-Qe3">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="PY4-XN-fMH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hl1-68-ttl">
+                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Add Card"/>
+                                <connections>
+                                    <action selector="AddCardPressed:" destination="wXb-j8-dMS" eventType="touchUpInside" id="DOT-bj-MeR"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="AddCardButton" destination="Hl1-68-ttl" id="phI-O8-FJa"/>
                         <outlet property="walletView" destination="6ce-4q-cBf" id="OIn-Pt-6Sz"/>
+                        <segue destination="kRS-ip-XnG" kind="show" identifier="addCardSegue" id="a2L-di-oc2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m8b-yY-vTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1097" y="441"/>
+        </scene>
+        <!--Add Card View Controller-->
+        <scene sceneID="JOY-wC-HcS">
+            <objects>
+                <viewController id="kRS-ip-XnG" customClass="addCardViewController" customModule="PP_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y1w-n4-tO1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6To-gY-Okb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QzT-pU-TdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2998" y="428"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="q3y-DP-FfV">

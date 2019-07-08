@@ -30,7 +30,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // UI customization
-    
     func viewload() {
         view.set2GradientBackground(colorOne: UIColor.white.withAlphaComponent(0.6), colorTwo:
             UIColor.blue.withAlphaComponent(0.6))
@@ -78,7 +77,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @objc func pulseButton(_ sender:UIButton) {
         sender.pulse()
     }
-
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         usernameTextField.resignFirstResponder()
@@ -87,9 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
     // Signs in the user to Firebase database
-    
     @IBAction func loginAction(_ sender: Any) {
         Auth.auth().signIn(withEmail: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error == nil{
@@ -107,9 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     }
 
-    
     // Segues
-    
     @IBAction func signupSegue(_ sender: UIButton) {
         performSegue(withIdentifier: "loginToSignup", sender: sender)
     }
