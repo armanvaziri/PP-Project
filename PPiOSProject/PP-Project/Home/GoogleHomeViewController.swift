@@ -35,8 +35,9 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     let infoMarker = GMSMarker()
     var cardTableView = UITableView()
     var transparentView = UIView()
-    var nearbyPlaces: [String] = []
+    var nearbyPlacesNames: [String] = []
     var nearbyPlacesTypes: [[String]] = []
+    var nearbyPlaceCoord: [[Double]] = []
     var selectedPlaceTypes: [String] = []
     
     // Outlets
@@ -175,7 +176,7 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         guard let url = URL(string: jsonUrlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, respone, err) in
             guard let data = data else { return }
-            if self.nearbyPlaces.count == 0 {
+            if self.nearbyPlacesNames.count == 0 {
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
                     if let results = json["results"] as! [[String: Any]]? {
@@ -185,7 +186,15 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
                             let index = results[counter]
                             let name = index["name"] as! String
                             let types = index["types"] as! [String]
-                            self.nearbyPlaces.append(name)
+                            
+                            let first = results.first
+                            let geometry = first!["geometry"] as! [String:Any]
+                            let location = geometry["location"] as! [String:Any]
+                            let lat = location["lat"] as! Double
+                            let lng = location["lng"] as! Double
+                            self.nearbyPlaceCoord.append([lat, lng])
+                            
+                            self.nearbyPlacesNames.append(name)
                             self.nearbyPlacesTypes.append(types)
                             counter += 1
                         }
@@ -222,6 +231,44 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
         createInfoMarker(mapView: mapView, place: place)
     }
     
+    func loadMapViewCV(indexPath: Int) {
+        let camera = GMSCameraPosition.camera(withLatitude: nearbyPlaceCoord[indexPath][0], longitude: nearbyPlaceCoord[indexPath][1], zoom: 19.5)
+        let mapView = GMSMapView.map(withFrame: CGRect.init(x: 0, y: 0, width: self.mapScreenView.frame.width, height: self.mapScreenView.frame.height), camera: camera)
+        mapView.delegate = self
+        
+        // Google Maps styling wizard
+        do {
+            // Set the map style by passing the URL of the local file. Make sure style.json is present in your project
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                print("Unable to find style.json")
+            }
+        } catch {
+            print("The style definition could not be loaded: \(error)")
+        }
+        createInfoMarkerCV(mapView: mapView, indexPath: indexPath)
+        
+    }
+    
+    func createInfoMarkerCV(mapView: GMSMapView, indexPath: Int) {
+        mapView.isMyLocationEnabled = true
+        let marker = GMSMarker()
+        marker.title = self.nearbyPlacesNames[indexPath]
+        marker.snippet = self.nearbyPlacesTypes[indexPath][0]
+        let location = CLLocationCoordinate2D(latitude: self.nearbyPlaceCoord[indexPath][0], longitude: self.nearbyPlaceCoord[indexPath][1])
+        marker.position = location
+        marker.opacity = 0
+        marker.infoWindowAnchor.y = 0.5
+        marker.appearAnimation = .pop
+        marker.layer.backgroundColor = UIColor.red.cgColor
+        marker.map = mapView
+        mapView.selectedMarker = marker
+        self.mapScreenView.addSubview(mapView)
+        cardRecommendationMenu()
+        
+    }
+    
     // Creates and places an info marker for the given place onto the map
     func createInfoMarker(mapView: GMSMapView, place: GMSPlace) {
         mapView.isMyLocationEnabled = true
@@ -244,23 +291,35 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     // Nearby locations CollectionView delegates
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if nearbyPlaces.count < 10 {
-            return nearbyPlaces.count
+        
+        if nearbyPlacesNames.count == 0 {
+            print("FUUUUCKKKK")
+            return 1
+        }
+        if nearbyPlacesNames.count < 10 {
+            return nearbyPlacesNames.count
         }
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! POICollectionViewCell
         
-        if nearbyPlaces.count > 0 {
-            cell.name.text = nearbyPlaces[indexPath.row]
+        if nearbyPlacesNames.count > 0 {
+            cell.name.text = nearbyPlacesNames[indexPath.row]
             cell.locationDetails.text = nearbyPlacesTypes[indexPath.row][0]
         } else {
             cell.name.text = "unable to load"
             cell.name.text = "unable to load"
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        loadMapViewCV(indexPath: indexPath.row)
+        
     }
     
     // Brings up a tableView of cards based on user-selected location
