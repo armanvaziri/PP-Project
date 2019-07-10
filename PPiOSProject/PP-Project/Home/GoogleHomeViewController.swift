@@ -11,6 +11,22 @@ import GooglePlaces
 import CoreLocation
 import GoogleUtilities
 
+extension UITextField {
+    func setPadding() {
+        let cgrt = CGRect(x: 0, y: 0, width: 10, height: self.frame.height)
+        let paddingView = UIView(frame: cgrt)
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    
+    func setBottomBorder() {
+        self.layer.shadowColor = UIColor.blue.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
+}
+
 class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     // Variables
     var cardImages = ["card2", "card3", "card4", "card5", "card1"]
@@ -31,6 +47,8 @@ class GoogleHomeViewController: UIViewController, CLLocationManagerDelegate, GMS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textField.setPadding()
+        self.textField.setBottomBorder()
         cardTableView.isScrollEnabled = true
         cardTableView.delegate = self
         cardTableView.dataSource = self
