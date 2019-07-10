@@ -1,5 +1,6 @@
 //
-//  addCardViewController.swift
+//
+//  AddCardViewController.swift
 //  PP-Project
 //
 //  Created by Elden Li on 7/8/19.
@@ -8,7 +9,7 @@
 
 import UIKit
 
-class addCardViewController: UIViewController {
+class AddCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C98830322D33D8E0071E95D /* addCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98830222D33D8E0071E95D /* addCardViewController.swift */; };
+		6C98830322D33D8E0071E95D /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98830222D33D8E0071E95D /* AddCardViewController.swift */; };
 		81E59DE6D1F40C9DB0F90F07 /* Pods_PP_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E88D5FFB2CFA3020503A510 /* Pods_PP_Project.framework */; };
 		A210AE952289541700571A17 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210AE942289541700571A17 /* WalletViewController.swift */; };
 		A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A210AE962289542C00571A17 /* WalletViewCell.swift */; };
@@ -33,7 +33,7 @@
 		22AD3AE42B96604DA7CC2DC5 /* Pods-PP-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP-Project.release.xcconfig"; path = "Target Support Files/Pods-PP-Project/Pods-PP-Project.release.xcconfig"; sourceTree = "<group>"; };
 		3E88D5FFB2CFA3020503A510 /* Pods_PP_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PP_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CDD4FE91A284C1731E90B5 /* Pods-PP-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PP-Project.debug.xcconfig"; path = "Target Support Files/Pods-PP-Project/Pods-PP-Project.debug.xcconfig"; sourceTree = "<group>"; };
-		6C98830222D33D8E0071E95D /* addCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addCardViewController.swift; sourceTree = "<group>"; };
+		6C98830222D33D8E0071E95D /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		A210AE942289541700571A17 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		A210AE962289542C00571A17 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
 		A217043B228103540006DBAB /* PP-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PP-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +79,7 @@
 		6C98830122D33B780071E95D /* CreateCard */ = {
 			isa = PBXGroup;
 			children = (
-				6C98830222D33D8E0071E95D /* addCardViewController.swift */,
+				6C98830222D33D8E0071E95D /* AddCardViewController.swift */,
 			);
 			path = CreateCard;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 				A210AE972289542C00571A17 /* WalletViewCell.swift in Sources */,
 				A2C58F89228E5A370058C49F /* POICollectionViewCell.swift in Sources */,
 				A222FA782293D7D0001E2884 /* CardMenuCell.swift in Sources */,
-				6C98830322D33D8E0071E95D /* addCardViewController.swift in Sources */,
+				6C98830322D33D8E0071E95D /* AddCardViewController.swift in Sources */,
 				A210AE952289541700571A17 /* WalletViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
